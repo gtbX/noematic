@@ -1,4 +1,6 @@
-DATA/
+data/
 *.OBJ
 *.DSK
 *.EXE
+*.SWP
+*.BAK
