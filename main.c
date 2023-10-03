@@ -1,10 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char** argv) {
-	int i;
-	for (i = 0; i < argc; ++i) {
-		printf("%s ", argv[i]);
+	FILE* f;
+	if (argc < 2) {
+		printf("Usage: %s [game.dlg]\n", argv[0]);
+		return 1;
 	}
-	printf("\n");
+
+	f = fopen(argv[1], "rb");
+	if (!f) {
+		perror("Game file");
+		return errno;
+	}
+
+	fclose(f);
 	return 0;
 }
