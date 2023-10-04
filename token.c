@@ -1,6 +1,21 @@
 #include "token.h"
 #include <string.h>
 
+void freadUtf8BOM(FILE* file) {
+	static const char BOM[] = { (char)0xEF, (char)0xBB, (char)0xBF };
+	const char* bom = BOM;
+	int c = fgetc(file);
+	for (; c != EOF; c = fgetc(file)) {
+		if (c != *bom++) {
+			ungetc(c, file);
+			break;
+		}
+		if (bom >= BOM + sizeof(BOM)) {
+			break;
+		}
+	}
+}
+
 char *freadtoken(char *buffer, size_t buff_size, FILE *file) {
 	int i, c;
 	const char *whitespace = "=;() \"\t\f\r\v\n";

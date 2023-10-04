@@ -19,6 +19,8 @@ int main(int argc, char** argv) {
 		return errno;
 	}
 
+	freadUtf8BOM(f);
+
 	freadtoken(buffer, sizeof(buffer), f);
 
 	printf("%s\n", buffer);
