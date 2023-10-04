@@ -1,4 +1,6 @@
 #include "token.h"
+#include <string.h>
+
 char *freadtoken(char *buffer, size_t buff_size, FILE *file) {
 	int i, c;
 	const char *whitespace = "=;() \"\t\f\r\v\n";
