@@ -5,4 +5,5 @@ data/
 *.SWP
 *.BAK
 *.o
+*.swp
 noematic

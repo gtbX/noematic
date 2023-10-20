@@ -1,11 +1,15 @@
 # The name of the source files
-SOURCES = main.c storage.c token.c
+SOURCES := main.c
+SOURCES += storage.c
+
+SOURCES += lex.yy.c
+SOURCES += y.tab.c
 
 # The name of the executable
 EXE = noematic
 
 # Flags for compilation (adding warnings are always good)
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -DYYDEBUG=1
 
 # Flags for linking (none for the moment)
 LDFLAGS =
@@ -36,6 +40,12 @@ $(EXE): $(OBJECTS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
+y.tab.c y.tab.h: dlg.y
+	yacc -d $< -Wcounterexamples
+
+lex.yy.c: dlg.l
+	lex -d $<
+
 # Target to clean up after us
 clean:
 	-rm -f $(EXE)      # Remove the executable file
@@ -44,5 +54,4 @@ clean:
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c storage.h token.h
 storage.o: storage.c storage.h
-token.o: token.c token.h
-
+lex.yy.c: y.tab.h

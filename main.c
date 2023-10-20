@@ -2,29 +2,28 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "token.h"
+#include "y.tab.h"
+
+extern FILE* yyin;
+extern int yy_flex_debug;
 
 int main(int argc, char** argv) {
-	FILE* f;
-	char buffer[128];
-
 	if (argc < 2) {
 		printf("Usage: %s [game.dlg]\n", argv[0]);
 		return 1;
 	}
 
-	f = fopen(argv[1], "rb");
-	if (!f) {
+	yyin = fopen(argv[1], "rb");
+	if (!yyin) {
 		perror("Game file");
 		return errno;
 	}
 
-	freadUtf8BOM(f);
+    yydebug = 1;
+    yy_flex_debug = 1;
 
-	freadtoken(buffer, sizeof(buffer), f);
+    yyparse();
 
-	printf("%s\n", buffer);
-
-	fclose(f);
+    fclose(yyin);
 	return 0;
 }

@@ -83,11 +83,3 @@ option          : STRING action_list
 void yyerror(char *s) {
     fprintf(stderr, "%s\n", s);
 }
-
-extern int yy_flex_debug;
-int main(void) {
-    yydebug = 1;
-    yy_flex_debug = 1;
-    yyparse();
-    return 0;
-}
