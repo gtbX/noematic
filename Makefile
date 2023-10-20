@@ -5,7 +5,7 @@ SOURCES = main.c storage.c token.c
 EXE = noematic
 
 # Flags for compilation (adding warnings are always good)
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 # Flags for linking (none for the moment)
 LDFLAGS =
@@ -34,7 +34,7 @@ $(EXE): $(OBJECTS)
 # This is a target that will compiler all needed source files into object files
 # We don't need to specify a command or any rules, "make" will handle it automatically
 %.o: %.c
-	$(CC) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 # Target to clean up after us
 clean:
