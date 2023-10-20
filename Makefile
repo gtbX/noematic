@@ -50,6 +50,8 @@ lex.yy.c: dlg.l
 clean:
 	-rm -f $(EXE)      # Remove the executable file
 	-rm -f $(OBJECTS)  # Remove the object files
+	-rm -f y.tab.c y.tab.h # Remove yacc files
+	-rm -f lex.yy.c    # Remove lex file
 
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c storage.h token.h
