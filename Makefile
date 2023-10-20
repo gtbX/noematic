@@ -54,6 +54,6 @@ clean:
 	-rm -f lex.yy.c    # Remove lex file
 
 # Finally we need to tell "make" what source and header file each object file depends on
-main.o: main.c storage.h token.h
+main.o: main.c storage.h y.tab.h
 storage.o: storage.c storage.h
 lex.yy.c: y.tab.h
