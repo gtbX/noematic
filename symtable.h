@@ -2,7 +2,7 @@
 #define SYM_TABLE_H
 
 #define SYM_LEN 64
-#define N_SYMS 64
+#define N_SYMS 256
 
 extern char syms[N_SYMS][SYM_LEN];
 

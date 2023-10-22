@@ -65,5 +65,5 @@ clean:
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c storage.h y.tab.h
 storage.o: storage.c storage.h
-idtable.o: idtable.c idtable.h
+symtable.o: symtable.c symtable.h
 lex.yy.c: y.tab.h

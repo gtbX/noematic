@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < N_SYMS; i++) {
         if (syms[i][0] == '\0')
             break;
-        printf("%s\n", syms[i]);
+        printf("%d: (%d)%s\n", i, strlen(syms[i]), syms[i]);
     }
 
     fclose(yyin);

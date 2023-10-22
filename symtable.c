@@ -2,7 +2,7 @@
 #include <string.h>
 #include "symtable.h"
 
-char syms[N_SYMS][SYM_LEN];
+char syms[N_SYMS][SYM_LEN] = { 0 };
 
 /* get or add the symbol name to the table. returns the id. */
 int get_sym(const char* id) {

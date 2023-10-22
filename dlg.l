@@ -14,13 +14,15 @@ void yyerror(char*);
 
 [-+=()<>{};:]       return *yytext;
 
-"terminal when"     return WHEN;
-"text"              return TEXT;
+"exit"              return EXIT;
+(terminal|player)" when" return WHEN;
+(show_)?"text"      return TEXT;
 "short"             return SHORT;
 "clear"             return CLEAR;
-"set"               return SET;
+"set"(local)?       return SET;
 (goto|next)         return GOTO;
 "options"           return OPTIONS;
+"notext"            ; /* nothing */
 
 "and"               return AND;
 "or"                return OR;

@@ -19,6 +19,7 @@ void yyerror(char*);
 %token <value> VALUE
 %token <string> STRING
 
+%token EXIT
 %token WHEN
 %token TEXT
 %token SHORT
@@ -65,7 +66,8 @@ action_list     : action_list action
                 |
                 ;
 
-action          : TEXT ':' STRING
+action          : EXIT
+                | TEXT ':' STRING
                 | SHORT ':' STRING
                 | CLEAR ':' SYMBOL
                 | SET ':' setter
