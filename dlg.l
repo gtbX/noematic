@@ -1,7 +1,8 @@
 %{
 #include <stdlib.h>
-void yyerror(char*);
 #include "y.tab.h"
+#include "symtable.h"
+void yyerror(char*);
 %}
 
 %x STRING_MODE
@@ -26,7 +27,10 @@ void yyerror(char*);
 "not"               return NOT;
 "=="                return EQUALS;
 
-[a-zA-Z_][a-zA-Z0-9_]* return IDENTIFIER;
+[a-zA-Z_][a-zA-Z0-9_]* {
+                        yylval.symbol = get_sym(yytext);
+                        return SYMBOL;
+                    }
 [0-9]+              return VALUE;
 
 \"[^"\n]*["\n]      return STRING;

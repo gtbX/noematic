@@ -3,6 +3,7 @@
 #include <errno.h>
 
 #include "y.tab.h"
+#include "symtable.h"
 
 extern FILE* yyin;
 extern int yy_flex_debug;
@@ -19,11 +20,18 @@ int main(int argc, char** argv) {
 		return errno;
 	}
 
-    yydebug = 1;
-    yy_flex_debug = 1;
+//    yydebug = 1;
+//    yy_flex_debug = 1;
 
     yyparse();
 
     fclose(yyin);
+
+    for (int i = 0; i < N_SYMS; i++) {
+        if (syms[i][0] == '\0')
+            break;
+        printf("%s\n", syms[i]);
+    }
+
 	return 0;
 }

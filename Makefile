@@ -1,7 +1,7 @@
 # The name of the source files
 SOURCES := main.c
 SOURCES += storage.c
-SOURCES += idtable.c
+SOURCES += symtable.c
 
 SOURCES += lex.yy.c
 SOURCES += y.tab.c
@@ -10,7 +10,7 @@ SOURCES += y.tab.c
 EXE = noematic
 
 # Flags for compilation (adding warnings are always good)
-CFLAGS = -Wall -g -DYYDEBUG=1
+CFLAGS = -Wall -Wno-unused-function -g -DYYDEBUG=1
 
 # Flags for linking (none for the moment)
 LDFLAGS =

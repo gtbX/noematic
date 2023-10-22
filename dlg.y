@@ -1,12 +1,23 @@
 %{
 #include <stdio.h>
+#include "storage.h"
 int yylex(void);
 void yyerror(char*);
 %}
 
-%token IDENTIFIER
-%token VALUE
-%token STRING
+%union {
+    int symbol;
+    int value;
+    struct {
+        int offset;
+        int length;
+    } string;
+//    node* n_ptr;
+};
+
+%token <symbol> SYMBOL
+%token <value> VALUE
+%token <string> STRING
 
 %token WHEN
 %token TEXT
@@ -26,6 +37,8 @@ void yyerror(char*);
 %left AND
 %nonassoc NOT
 
+//%type <n_ptr> when expression 
+
 %%
 game            : game when
                 |
@@ -34,7 +47,7 @@ game            : game when
 when            : WHEN '(' expression ')' action_block
                 ;
 
-expression      : IDENTIFIER
+expression      : SYMBOL
                 | VALUE
                 | NOT expression
                 | '(' expression ')'
@@ -54,14 +67,14 @@ action_list     : action_list action
 
 action          : TEXT ':' STRING
                 | SHORT ':' STRING
-                | CLEAR ':' IDENTIFIER
+                | CLEAR ':' SYMBOL
                 | SET ':' setter
-                | GOTO ':' IDENTIFIER
+                | GOTO ':' SYMBOL
                 | OPTIONS ':' option_block
                 ;
 
-setter          : IDENTIFIER ';' assignment
-                | IDENTIFIER
+setter          : SYMBOL ';' assignment
+                | SYMBOL
                 ;
 
 assignment      : '=' expression ';'
