@@ -1,6 +1,5 @@
 %{
 #include <stdio.h>
-#include "storage.h"
 int yylex(void);
 void yyerror(char*);
 %}

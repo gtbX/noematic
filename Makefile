@@ -1,6 +1,5 @@
 # The name of the source files
 SOURCES := main.c
-SOURCES += storage.c
 SOURCES += strtable.c
 SOURCES += symtable.c
 
@@ -64,8 +63,7 @@ clean:
 	-rm -f lex.yy.c    # Remove lex file
 
 # Finally we need to tell "make" what source and header file each object file depends on
-main.o: main.c storage.h strtable.h symtable.h y.tab.h
-storage.o: storage.c storage.h
+main.o: main.c strtable.h symtable.h y.tab.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
 lex.yy.c: y.tab.h strtable.h symtable.h
