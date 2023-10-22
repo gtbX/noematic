@@ -39,10 +39,19 @@ int extract_string(const char* str);
                     }
 [0-9]+              return VALUE;
 
-\"[^"\n]*["\n]      { yytext[yyleng - 1] = '\0'; yylval.string = extract_string(yytext + 1); return STRING; }
+\"[^"\n]*["\n]      {
+                        yytext[yyleng - 1] = '\0';
+                        yylval.string = extract_string(yytext + 1);
+                        return STRING;
+                    }
 
 "[["                { BEGIN STRING_MODE; yymore(); }
-<STRING_MODE>"]]"   { BEGIN 0; yytext[yyleng - 2] = '\0'; yylval.string = extract_string(yytext + 2); return STRING; }
+<STRING_MODE>"]]"   {
+                        BEGIN 0;
+                        yytext[yyleng - 2] = '\0';
+                        yylval.string = extract_string(yytext + 2);
+                        return STRING;
+                    }
 <STRING_MODE>.|\n   yymore();
 
 [ \t\n]             ; /* skip whitespace */
