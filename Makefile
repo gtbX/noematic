@@ -1,6 +1,7 @@
 # The name of the source files
 SOURCES := main.c
 SOURCES += storage.c
+SOURCES += idtable.c
 
 SOURCES += lex.yy.c
 SOURCES += y.tab.c
@@ -44,7 +45,7 @@ y.tab.c y.tab.h: dlg.y
 	yacc -d $< -Wcounterexamples
 
 lex.yy.c: dlg.l
-	lex -d $<
+	$(LEX) -d $<
 
 # Target to clean up after us
 clean:
@@ -56,4 +57,5 @@ clean:
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c storage.h y.tab.h
 storage.o: storage.c storage.h
+idtable.o: idtable.c idtable.h
 lex.yy.c: y.tab.h
