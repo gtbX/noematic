@@ -35,11 +35,11 @@ void yyerror(char*);
 
 \"[^"\n]*["\n]      return STRING;
 
-"[["                { BEGIN STRING_MODE; yymore(); }
-<STRING_MODE>"]]"   { BEGIN 0; return STRING; }
+"[["                { BEGIN STRING_MODE; yylval.string.offset = ftell(yyin); yymore(); }
+<STRING_MODE>"]]"   { BEGIN 0; yylval.string.length = ftell(yyin) - yylval.string.offset; return STRING; }
 <STRING_MODE>.|\n   yymore();
 
-[ \t]               ; /* skip whitespace */
+[ \t\n]             ; /* skip whitespace */
 
 %%
 

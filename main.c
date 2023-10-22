@@ -20,12 +20,12 @@ int main(int argc, char** argv) {
 		return errno;
 	}
 
-//    yydebug = 1;
-//    yy_flex_debug = 1;
+#if YYDEBUG
+    yydebug = YYDEBUG;
+    yy_flex_debug = YYDEBUG;
+#endif
 
     yyparse();
-
-    fclose(yyin);
 
     for (int i = 0; i < N_SYMS; i++) {
         if (syms[i][0] == '\0')
@@ -33,5 +33,6 @@ int main(int argc, char** argv) {
         printf("%s\n", syms[i]);
     }
 
-	return 0;
+    fclose(yyin);
+    return 0;
 }

@@ -10,16 +10,24 @@ SOURCES += y.tab.c
 EXE = noematic
 
 # Flags for compilation (adding warnings are always good)
-CFLAGS = -Wall -Wno-unused-function -g -DYYDEBUG=1
+CFLAGS := -Wall -Wno-unused-function -g
 
 # Flags for linking (none for the moment)
 LDFLAGS =
+
+# Flags for lexer
+LEXFLAGS =
 
 # Libraries to link with (none for the moment)
 LIBS =
 
 # Use the GCC frontend program when linking
 LD = gcc
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -DYYDEBUG=1
+	LEXFLAGS += -d
+endif
 
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
@@ -45,7 +53,7 @@ y.tab.c y.tab.h: dlg.y
 	yacc -d $< -Wcounterexamples
 
 lex.yy.c: dlg.l
-	$(LEX) -d $<
+	$(LEX) $(LEXFLAGS) $<
 
 # Target to clean up after us
 clean:
