@@ -8,10 +8,7 @@ void yyerror(char*);
 %union {
     int symbol;
     int value;
-    struct {
-        int offset;
-        int length;
-    } string;
+    int string;
 //    node* n_ptr;
 };
 

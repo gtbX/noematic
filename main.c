@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
-#include "y.tab.h"
+#include "strtable.h"
 #include "symtable.h"
+#include "y.tab.h"
 
 extern FILE* yyin;
 extern int yy_flex_debug;
@@ -30,7 +32,13 @@ int main(int argc, char** argv) {
     for (int i = 0; i < N_SYMS; i++) {
         if (syms[i][0] == '\0')
             break;
-        printf("%d: (%d)%s\n", i, strlen(syms[i]), syms[i]);
+        printf("%d: (%zd)%s\n", i, strlen(syms[i]), syms[i]);
+    }
+
+    for (int i = 0; i < N_STRINGS; i++) {
+        if (strings[i] == NULL)
+            break;
+        printf("%d: %s\n", i, strings[i]);
     }
 
     fclose(yyin);

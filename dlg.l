@@ -1,8 +1,11 @@
 %{
 #include <stdlib.h>
 #include "y.tab.h"
+#include "strtable.h"
 #include "symtable.h"
 void yyerror(char*);
+
+int extract_string(const char* str);
 %}
 
 %x STRING_MODE
@@ -35,10 +38,10 @@ void yyerror(char*);
                     }
 [0-9]+              return VALUE;
 
-\"[^"\n]*["\n]      return STRING;
+\"[^"\n]*["\n]      { yytext[yyleng - 1] = '\0'; yylval.string = extract_string(yytext + 1); return STRING; }
 
-"[["                { BEGIN STRING_MODE; yylval.string.offset = ftell(yyin); yymore(); }
-<STRING_MODE>"]]"   { BEGIN 0; yylval.string.length = ftell(yyin) - yylval.string.offset; return STRING; }
+"[["                { BEGIN STRING_MODE; yymore(); }
+<STRING_MODE>"]]"   { BEGIN 0; yytext[yyleng - 2] = '\0'; yylval.string = extract_string(yytext + 2); return STRING; }
 <STRING_MODE>.|\n   yymore();
 
 [ \t\n]             ; /* skip whitespace */
@@ -47,4 +50,12 @@ void yyerror(char*);
 
 int yywrap(void) {
     return 1;
+}
+
+int extract_string(const char* str) {
+    char* eq = strchr(str, '=');
+    if (eq != NULL) {
+        return add_string(++eq);
+    }
+    return add_string(str);
 }
