@@ -17,6 +17,7 @@ void yyerror(char*);
 
 %token EXIT
 %token WHEN
+%token STRING_DEF
 %token TEXT
 %token SHORT
 %token CLEAR
@@ -37,8 +38,15 @@ void yyerror(char*);
 //%type <n_ptr> when expression 
 
 %%
-game            : game when
+game            : game gamespec
                 |
+                ;
+
+gamespec        : when
+                | string
+                ;
+
+string          : STRING_DEF SYMBOL STRING
                 ;
 
 when            : WHEN '(' expression ')' action_block

@@ -19,6 +19,7 @@ int extract_string(const char* str);
 
 "exit"              return EXIT;
 (terminal|player)" when" return WHEN;
+"string"            return STRING_DEF;
 (show_)?"text"      return TEXT;
 "short"             return SHORT;
 "clear"             return CLEAR;
