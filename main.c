@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
+#include "dlg.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "y.tab.h"
@@ -40,6 +41,15 @@ int main(int argc, char** argv) {
             break;
         printf("%d: %s\n", i, strings[i]);
     }
+
+    for (int i = 0; i < N_WHENS; i++) {
+        if (whens[i] == NULL)
+            break;
+        printf("%d: %p\n", i, whens[i]);
+    }
+
+    clear_whens();
+    clear_strings();
 
     fclose(yyin);
     return 0;

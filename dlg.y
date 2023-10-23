@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include "dlg.h"
 int yylex(void);
 void yyerror(char*);
 %}
@@ -8,7 +9,8 @@ void yyerror(char*);
     int symbol;
     int value;
     int string;
-//    node* n_ptr;
+    struct expression* expression;
+    struct action* action;
 };
 
 %token <symbol> SYMBOL
@@ -35,7 +37,8 @@ void yyerror(char*);
 %left AND
 %nonassoc NOT
 
-//%type <n_ptr> when expression 
+%type <expression> expression
+%type <action> action_block action_list action
 
 %%
 game            : game gamespec
@@ -49,7 +52,7 @@ gamespec        : when
 string          : STRING_DEF SYMBOL STRING
                 ;
 
-when            : WHEN '(' expression ')' action_block
+when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
                 ;
 
 expression      : SYMBOL
@@ -63,7 +66,7 @@ expression      : SYMBOL
                 | expression '<' expression
                 ;
 
-action_block    : '{' action_list '}'
+action_block    : '{' action_list '}'                   { $$ = $2; }
                 ;
 
 action_list     : action_list action
