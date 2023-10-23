@@ -69,17 +69,17 @@ expression      : SYMBOL
 action_block    : '{' action_list '}'                   { $$ = $2; }
                 ;
 
-action_list     : action_list action
-                |
+action_list     : action action_list                    { $1->next = $2; $$ = $1; }
+                |                                       { $$ = NULL; }
                 ;
 
-action          : EXIT
-                | TEXT ':' STRING
-                | SHORT ':' STRING
-                | CLEAR ':' SYMBOL
-                | SET ':' setter
-                | GOTO ':' SYMBOL
-                | OPTIONS ':' option_block
+action          : EXIT                                  { $$ = create_action(1); }
+                | TEXT ':' STRING                       { $$ = create_action(1); }
+                | SHORT ':' STRING                      { $$ = create_action(1); }
+                | CLEAR ':' SYMBOL                      { $$ = create_action(1); }
+                | SET ':' setter                        { $$ = create_action(1); }
+                | GOTO ':' SYMBOL                       { $$ = create_action(1); }
+                | OPTIONS ':' option_block              { $$ = create_action(1); }
                 ;
 
 setter          : SYMBOL ';' assignment
