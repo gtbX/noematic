@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
             break;
         printf("when %d: %p\n", i, whens[i]);
         for (struct action* act = whens[i]->actions; act; act = act->next) {
-            printf("action %p\n", act);
+            printf("action %d, %p\n", act->type, act);
         }
     }
 

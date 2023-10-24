@@ -24,7 +24,9 @@ void clear_whens() {
 }
 
 struct action* create_action(int type) {
-    return malloc(sizeof(struct action));
+    struct action* action = malloc(sizeof(struct action));
+    action->type = type;
+    return action;
 }
 
 void free_action(struct action* action) {

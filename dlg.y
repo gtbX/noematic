@@ -73,13 +73,13 @@ action_list     : action action_list                    { $1->next = $2; $$ = $1
                 |                                       { $$ = NULL; }
                 ;
 
-action          : EXIT                                  { $$ = create_action(1); }
-                | TEXT ':' STRING                       { $$ = create_action(1); }
-                | SHORT ':' STRING                      { $$ = create_action(1); }
-                | CLEAR ':' SYMBOL                      { $$ = create_action(1); }
-                | SET ':' setter                        { $$ = create_action(1); }
-                | GOTO ':' SYMBOL                       { $$ = create_action(1); }
-                | OPTIONS ':' option_block              { $$ = create_action(1); }
+action          : EXIT                                  { $$ = create_action(EXIT); }
+                | TEXT ':' STRING                       { $$ = create_action(TEXT); }
+                | SHORT ':' STRING                      { $$ = create_action(SHORT); }
+                | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); }
+                | SET ':' setter                        { $$ = create_action(SET); }
+                | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); }
+                | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); }
                 ;
 
 setter          : SYMBOL ';' assignment
