@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include "dlg.h"
+#include "parts.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "y.tab.h"

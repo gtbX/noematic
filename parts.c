@@ -1,4 +1,4 @@
-#include "dlg.h"
+#include "parts.h"
 #include <stdlib.h>
 
 struct when* whens[N_WHENS] = { 0 };

@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-#include "dlg.h"
+#include "parts.h"
 int yylex(void);
 void yyerror(char*);
 %}
