@@ -74,11 +74,11 @@ action_list     : action action_list                    { $1->next = $2; $$ = $1
                 ;
 
 action          : EXIT                                  { $$ = create_action(EXIT); }
-                | TEXT ':' STRING                       { $$ = create_action(TEXT); }
-                | SHORT ':' STRING                      { $$ = create_action(SHORT); }
-                | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); }
+                | TEXT ':' STRING                       { $$ = create_action(TEXT); $$->arg.text_str = $3; }
+                | SHORT ':' STRING                      { $$ = create_action(SHORT); $$->arg.short_str = $3; }
+                | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); $$->arg.clear_sym = $3; }
                 | SET ':' setter                        { $$ = create_action(SET); }
-                | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); }
+                | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); $$->arg.goto_sym = $3; }
                 | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); }
                 ;
 

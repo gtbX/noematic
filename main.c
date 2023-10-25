@@ -48,6 +48,10 @@ int main(int argc, char** argv) {
         printf("when %d: %p\n", i, whens[i]);
         for (struct action* act = whens[i]->actions; act; act = act->next) {
             printf("action %d, %p\n", act->type, act);
+            if (act->type == TEXT)
+                printf("%s\n", strings[act->arg.text_str]);
+            if (act->type == SHORT)
+                printf("%s\n", strings[act->arg.short_str]);
         }
     }
 
