@@ -81,7 +81,7 @@ action          : EXIT                                  { $$ = create_action(EXI
                 | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); $$->arg.clear_sym = $3; }
                 | SET ':' setter                        { $$ = create_action(SET); }
                 | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); $$->arg.goto_sym = $3; }
-                | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); $$->arg.option = $3; }
+                | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); $$->arg.options = $3; }
                 ;
 
 setter          : SYMBOL ';' assignment

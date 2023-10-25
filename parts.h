@@ -15,7 +15,7 @@ struct action {
         int short_str;
         int clear_sym;
         int goto_sym;
-        struct option* option;
+        struct option* options;
     } arg;
 };
 
