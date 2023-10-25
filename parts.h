@@ -15,12 +15,14 @@ struct action {
         int short_str;
         int clear_sym;
         int goto_sym;
+        struct option* option;
     } arg;
 };
 
 struct option {
     short text;
     struct action* actions;
+    struct option* next;
 };
 
 struct when {
@@ -41,6 +43,12 @@ struct action* create_action(int type);
 
 /* free the given action object */
 void free_action(struct action*);
+
+/* create a new option object with the given text and actions */
+struct option* create_option(int text, struct action* actions);
+
+/* free the given option object */
+void free_option(struct option*);
 
 #endif  // DLG_H
 

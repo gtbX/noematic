@@ -11,6 +11,7 @@ void yyerror(char*);
     int string;
     struct expression* expression;
     struct action* action;
+    struct option* option;
 };
 
 %token <symbol> SYMBOL
@@ -39,6 +40,7 @@ void yyerror(char*);
 
 %type <expression> expression
 %type <action> action_block action_list action
+%type <option> option_block option_list option
 
 %%
 game            : game gamespec
@@ -79,7 +81,7 @@ action          : EXIT                                  { $$ = create_action(EXI
                 | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); $$->arg.clear_sym = $3; }
                 | SET ':' setter                        { $$ = create_action(SET); }
                 | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); $$->arg.goto_sym = $3; }
-                | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); }
+                | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); $$->arg.option = $3; }
                 ;
 
 setter          : SYMBOL ';' assignment
@@ -91,14 +93,14 @@ assignment      : '=' expression ';'
                 | '-' '=' expression ';'
                 ;
 
-option_block    : '{' option_list '}'
+option_block    : '{' option_list '}'                   { $$ = $2; }
                 ;
 
-option_list     : option_list option
-                |
+option_list     : option option_list                    { $1->next = $2; $$ = $1; }
+                |                                       { $$ = NULL; }
                 ;
 
-option          : STRING action_list
+option          : STRING action_list                    { $$ = create_option($1, $2); }
                 ;
 %%
 

@@ -34,3 +34,16 @@ void free_action(struct action* action) {
         free_action(action->next);
     free(action);
 }
+
+struct option* create_option(int text, struct action* actions) {
+    struct option* option = malloc(sizeof(struct option));
+    option->text = text;
+    option->actions = actions;
+    return option;
+}
+
+void free_option(struct option* option) {
+    if(option->next != NULL)
+        free_option(option->next);
+    free(option);
+}
