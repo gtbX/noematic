@@ -1,4 +1,4 @@
-#ifndef PARTS_h
+#ifndef PARTS_H
 #define PARTS_H
 
 #include "expr.h"
