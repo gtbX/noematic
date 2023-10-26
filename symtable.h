@@ -5,6 +5,7 @@
 #define N_SYMS 256
 
 extern char syms[N_SYMS][SYM_LEN];
+extern int vars[N_SYMS];
 
 /* get or add the symbol name to the table. returns the id. */
 int get_sym(const char* id);

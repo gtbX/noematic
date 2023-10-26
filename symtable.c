@@ -3,6 +3,7 @@
 #include "symtable.h"
 
 char syms[N_SYMS][SYM_LEN] = { 0 };
+int vars[N_SYMS] = { 0 };
 
 /* get or add the symbol name to the table. returns the id. */
 int get_sym(const char* id) {

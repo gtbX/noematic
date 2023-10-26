@@ -71,4 +71,4 @@ parts.o: parts.c parts.h expr.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
 lex.yy.c: y.tab.h strtable.h symtable.h
-y.tab.c: parts.h
+y.tab.c: parts.h symtable.h
