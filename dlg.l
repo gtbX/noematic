@@ -37,7 +37,7 @@ int extract_string(const char* str);
                         yylval.symbol = get_sym(yytext);
                         return SYMBOL;
                     }
-[0-9]+              return VALUE;
+[0-9]+              { yylval.value = atoi(yytext); return VALUE; }
 
 \"[^"\n]*["\n]      {
                         yytext[yyleng - 1] = '\0';

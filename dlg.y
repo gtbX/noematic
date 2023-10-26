@@ -57,15 +57,15 @@ string          : STRING_DEF SYMBOL STRING
 when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
                 ;
 
-expression      : SYMBOL
-                | VALUE
-                | NOT expression
-                | '(' expression ')'
-                | expression AND expression
-                | expression OR expression
-                | expression EQUALS expression
-                | expression '>' expression
-                | expression '<' expression
+expression      : SYMBOL                                { $$ = create_expression(SYMBOL); $$->symbol = $1; }
+                | VALUE                                 { $$ = create_expression(VALUE); $$->value = $1; }
+                | NOT expression                        { $$ = create_expression(NOT); $$->operands.rhs = $2; }
+                | '(' expression ')'                    { $$ = $2; }
+                | expression AND expression             { $$ = create_expression(AND); $$->operands.lhs = $1; $$->operands.rhs = $3; }
+                | expression OR expression              { $$ = create_expression(OR); $$->operands.lhs = $1; $$->operands.rhs = $3; }
+                | expression EQUALS expression          { $$ = create_expression(EQUALS); $$->operands.lhs = $1; $$->operands.rhs = $3; }
+                | expression '>' expression             { $$ = create_expression('>'); $$->operands.lhs = $1; $$->operands.rhs = $3; }
+                | expression '<' expression             { $$ = create_expression('<'); $$->operands.lhs = $1; $$->operands.rhs = $3; }
                 ;
 
 action_block    : '{' action_list '}'                   { $$ = $2; }

@@ -1,11 +1,9 @@
-#ifndef DLG_H 
-#define DLG_H
+#ifndef PARTS_h
+#define PARTS_H
+
+#include "expr.h"
 
 #define N_WHENS 256
-
-struct expression {
-    int type;
-};
 
 struct action {
     int type;
@@ -50,5 +48,5 @@ struct option* create_option(int text, struct action* actions);
 /* free the given option object */
 void free_option(struct option*);
 
-#endif  // DLG_H
+#endif  // PARTS_H
 

@@ -12,6 +12,8 @@ int create_when(struct expression* expression, struct action* actions) {
 }
 
 void free_when(struct when* w) {
+    if (w->condition)
+        free_expression(w->condition);
     if (w->actions)
         free_action(w->actions);
     free(w);

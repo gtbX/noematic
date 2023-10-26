@@ -11,6 +11,37 @@
 extern FILE* yyin;
 extern int yy_flex_debug;
 
+void print_expression(struct expression* expr) {
+    if (expr->type == SYMBOL) {
+        printf(" %s ", syms[expr->symbol]);
+    } else if (expr->type == VALUE) {
+        printf(" %d ", expr->value);
+    } else if (expr->type == NOT) {
+        printf("NOT");
+        print_expression(expr->operands.rhs);
+    } else {
+        print_expression(expr->operands.lhs);
+        switch (expr->type) {
+        case AND:
+            printf("AND");
+            break;
+        case OR:
+            printf("OR");
+            break;
+        case EQUALS:
+            printf("==");
+            break;
+        case '<':
+            printf("<");
+            break;
+        case '>':
+            printf(">");
+            break;
+        }
+        print_expression(expr->operands.rhs);
+    }
+}
+
 void print_options(struct option* options);
 
 void print_actions(struct action* actions) {
@@ -66,7 +97,9 @@ int main(int argc, char** argv) {
     for (int i = 0; i < N_WHENS; i++) {
         if (whens[i] == NULL)
             break;
-        printf("when %d: %p\n", i, whens[i]);
+        printf("when %d: %p ", i, whens[i]);
+        print_expression(whens[i]->condition);
+        printf("\n");
         print_actions(whens[i]->actions);
     }
 
