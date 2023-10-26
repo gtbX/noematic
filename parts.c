@@ -1,4 +1,5 @@
 #include "parts.h"
+#include "y.tab.h"
 #include <stdlib.h>
 
 struct when* whens[N_WHENS] = { 0 };
@@ -12,10 +13,8 @@ int create_when(struct expression* expression, struct action* actions) {
 }
 
 void free_when(struct when* w) {
-    if (w->condition)
-        free_expression(w->condition);
-    if (w->actions)
-        free_action(w->actions);
+    free_expression(w->condition);
+    free_action(w->actions);
     free(w);
 }
 
@@ -32,9 +31,32 @@ struct action* create_action(int type) {
 }
 
 void free_action(struct action* action) {
-    if (action->next != NULL)
-        free_action(action->next);
+    if (!action)
+        return;
+    free_action(action->next);
+    switch (action->type) {
+    case SET:
+        free_setter(action->arg.setter);
+        break;
+    case OPTIONS:
+        free_option(action->arg.options);
+        break;
+    }
     free(action);
+}
+
+struct setter* create_setter(struct expression* exp, char mod) {
+    struct setter* setter = malloc(sizeof(struct setter));
+    setter->exp = exp;
+    setter->mod = mod;
+    return setter;
+}
+
+void free_setter(struct setter* setter) {
+    if (!setter)
+        return;
+    free_expression(setter->exp);
+    free(setter);
 }
 
 struct option* create_option(int text, struct action* actions) {
@@ -45,7 +67,9 @@ struct option* create_option(int text, struct action* actions) {
 }
 
 void free_option(struct option* option) {
-    if(option->next != NULL)
-        free_option(option->next);
+    if (!option)
+        return;
+    free_option(option->next);
+    free_action(option->actions);
     free(option);
 }

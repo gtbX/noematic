@@ -11,6 +11,7 @@ void yyerror(char*);
     int string;
     struct expression* expression;
     struct action* action;
+    struct setter* setter;
     struct option* option;
 };
 
@@ -40,6 +41,7 @@ void yyerror(char*);
 
 %type <expression> expression
 %type <action> action_block action_list action
+%type <setter> assignment setter
 %type <option> option_block option_list option
 
 %%
@@ -78,19 +80,19 @@ action_list     : action action_list                    { $1->next = $2; $$ = $1
 action          : EXIT                                  { $$ = create_action(EXIT); }
                 | TEXT ':' STRING                       { $$ = create_action(TEXT); $$->arg.text_str = $3; }
                 | SHORT ':' STRING                      { $$ = create_action(SHORT); $$->arg.short_str = $3; }
-                | CLEAR ':' SYMBOL                      { $$ = create_action(CLEAR); $$->arg.clear_sym = $3; }
-                | SET ':' setter                        { $$ = create_action(SET); }
+                | CLEAR ':' SYMBOL                      { $$ = create_action(SET); $$->arg.setter = create_setter(create_expression(VALUE), 0); $$->arg.setter->exp->value = 0; $$->arg.setter->sym = $3; }
+                | SET ':' setter                        { $$ = create_action(SET); $$->arg.setter = $3; }
                 | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); $$->arg.goto_sym = $3; }
                 | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); $$->arg.options = $3; }
                 ;
 
-setter          : SYMBOL ';' assignment
-                | SYMBOL
+setter          : SYMBOL ';' assignment                 { $$ = $3; $$->sym = $1; }
+                | SYMBOL                                { $$ = create_setter(create_expression(VALUE), 0); $$->exp->value = 1; $$->sym = $1; }
                 ;
 
-assignment      : '=' expression ';'
-                | '+' '=' expression ';'
-                | '-' '=' expression ';'
+assignment      : '=' expression ';'                    { $$ = create_setter($2, 0); }
+                | '+' '=' expression ';'                { $$ = create_setter($3, 1); }
+                | '-' '=' expression ';'                { $$ = create_setter($3, -1); }
                 ;
 
 option_block    : '{' option_list '}'                   { $$ = $2; }

@@ -5,14 +5,20 @@
 
 #define N_WHENS 256
 
+struct setter {
+    int sym;
+    struct expression* exp;
+    char mod;
+};
+
 struct action {
     int type;
     struct action* next;
     union {
         int text_str;
         int short_str;
-        int clear_sym;
         int goto_sym;
+        struct setter* setter;
         struct option* options;
     } arg;
 };
@@ -41,6 +47,12 @@ struct action* create_action(int type);
 
 /* free the given action object */
 void free_action(struct action*);
+
+/* create a new setter with the given expression and modifier */
+struct setter* create_setter(struct expression* exp, char mod);
+
+/* free the given setter object */
+void free_setter(struct setter*);
 
 /* create a new option object with the given text and actions */
 struct option* create_option(int text, struct action* actions);

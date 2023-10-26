@@ -9,6 +9,8 @@ struct expression* create_expression(int type) {
 }
 
 void free_expression(struct expression* expr) {
+    if (!expr)
+        return;
     switch(expr->type) {
     case AND:
     case OR:
