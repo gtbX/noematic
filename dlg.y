@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include "parts.h"
+#include "symtable.h"
 int yylex(void);
 void yyerror(char*);
 %}
@@ -53,7 +54,7 @@ gamespec        : when
                 | string
                 ;
 
-string          : STRING_DEF SYMBOL STRING
+string          : STRING_DEF SYMBOL STRING              { vars[$2] = $3; }
                 ;
 
 when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
