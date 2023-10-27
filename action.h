@@ -9,8 +9,8 @@ struct action {
     union {
         int text_str;
         int short_str;
-        int clear_sym;
         int goto_sym;
+        struct setter* setter;
         struct option* options;
     } arg;
 };

@@ -1,5 +1,7 @@
 #include "action.h"
 #include <stdlib.h>
+#include "parts.h"
+#include "y.tab.h"
 
 struct action* create_action(int type) {
     struct action* action = malloc(sizeof(struct action));

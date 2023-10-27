@@ -1,5 +1,4 @@
 #include "parts.h"
-#include "y.tab.h"
 #include <stdlib.h>
 
 struct when* whens[N_WHENS] = { 0 };
