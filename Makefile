@@ -1,5 +1,6 @@
 # The name of the source files
 SOURCES := main.c
+SOURCES += action.c
 SOURCES += expr.c
 SOURCES += parts.c
 SOURCES += strtable.c
@@ -66,8 +67,9 @@ clean:
 
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c strtable.h symtable.h y.tab.h
+action.o: action.h
 expr.o: expr.c expr.h
-parts.o: parts.c parts.h expr.h
+parts.o: parts.c parts.h action.h expr.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
 lex.yy.c: y.tab.h strtable.h symtable.h

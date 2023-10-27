@@ -24,27 +24,6 @@ void clear_whens() {
     }
 }
 
-struct action* create_action(int type) {
-    struct action* action = malloc(sizeof(struct action));
-    action->type = type;
-    return action;
-}
-
-void free_action(struct action* action) {
-    if (!action)
-        return;
-    free_action(action->next);
-    switch (action->type) {
-    case SET:
-        free_setter(action->arg.setter);
-        break;
-    case OPTIONS:
-        free_option(action->arg.options);
-        break;
-    }
-    free(action);
-}
-
 struct setter* create_setter(struct expression* exp, char mod) {
     struct setter* setter = malloc(sizeof(struct setter));
     setter->exp = exp;
