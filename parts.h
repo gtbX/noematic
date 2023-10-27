@@ -3,6 +3,7 @@
 
 #include "action.h"
 #include "expr.h"
+#include "option.h"
 
 #define N_WHENS 256
 
@@ -10,12 +11,6 @@ struct setter {
     int sym;
     struct expression* exp;
     char mod;
-};
-
-struct option {
-    short text;
-    struct action* actions;
-    struct option* next;
 };
 
 struct when {
@@ -36,11 +31,5 @@ struct setter* create_setter(struct expression* exp, char mod);
 
 /* free the given setter object */
 void free_setter(struct setter*);
-
-/* create a new option object with the given text and actions */
-struct option* create_option(int text, struct action* actions);
-
-/* free the given option object */
-void free_option(struct option*);
 
 #endif  // PARTS_H

@@ -2,6 +2,7 @@
 SOURCES := main.c
 SOURCES += action.c
 SOURCES += expr.c
+SOURCES += option.c
 SOURCES += parts.c
 SOURCES += strtable.c
 SOURCES += symtable.c
@@ -69,7 +70,8 @@ clean:
 main.o: main.c strtable.h symtable.h y.tab.h
 action.o: action.h
 expr.o: expr.c expr.h
-parts.o: parts.c parts.h action.h expr.h
+option.o: option.c option.h action.h
+parts.o: parts.c parts.h action.h expr.h option.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
 lex.yy.c: y.tab.h strtable.h symtable.h
