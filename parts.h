@@ -1,21 +1,10 @@
 #ifndef PARTS_H
 #define PARTS_H
 
+#include "action.h"
 #include "expr.h"
 
 #define N_WHENS 256
-
-struct action {
-    int type;
-    struct action* next;
-    union {
-        int text_str;
-        int short_str;
-        int clear_sym;
-        int goto_sym;
-        struct option* options;
-    } arg;
-};
 
 struct option {
     short text;
@@ -36,12 +25,6 @@ int create_when(struct expression*, struct action*);
 /* free the list of when objects */
 void clear_whens();
 
-/* create a new action object of the given type */
-struct action* create_action(int type);
-
-/* free the given action object */
-void free_action(struct action*);
-
 /* create a new option object with the given text and actions */
 struct option* create_option(int text, struct action* actions);
 
@@ -49,4 +32,3 @@ struct option* create_option(int text, struct action* actions);
 void free_option(struct option*);
 
 #endif  // PARTS_H
-

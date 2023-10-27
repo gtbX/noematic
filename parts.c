@@ -25,18 +25,6 @@ void clear_whens() {
     }
 }
 
-struct action* create_action(int type) {
-    struct action* action = malloc(sizeof(struct action));
-    action->type = type;
-    return action;
-}
-
-void free_action(struct action* action) {
-    if (action->next != NULL)
-        free_action(action->next);
-    free(action);
-}
-
 struct option* create_option(int text, struct action* actions) {
     struct option* option = malloc(sizeof(struct option));
     option->text = text;
