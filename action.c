@@ -1,6 +1,10 @@
 #include "action.h"
+
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "parts.h"
+#include "strtable.h"
 #include "y.tab.h"
 
 struct action* create_action(int type) {
@@ -22,4 +26,16 @@ void free_action(struct action* action) {
         break;
     }
     free(action);
+}
+
+void exec_action(struct action* action) {
+    if (!action)
+        return;
+
+    switch (action->type) {
+    case TEXT:
+        printf("%s", strings[action->arg.text_str]);
+    }
+
+    exec_action(action->next);
 }
