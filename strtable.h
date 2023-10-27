@@ -1,13 +1,13 @@
 #ifndef STRING_TABLE_H
 #define STRING_TABLE_H
 
-#define N_STRINGS 512
-
-extern char* strings[N_STRINGS];
-
 /* add the string to the table, returning its index */
 int add_string(const char* string);
 
+/* get the string referenced by the given id */
+const char* get_string(int id);
+
+/* clear string table and allocated memory */
 void clear_strings();
 
 #endif  // STRING_TABLE_H

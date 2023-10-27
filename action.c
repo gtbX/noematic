@@ -34,7 +34,7 @@ void exec_action(struct action* action) {
 
     switch (action->type) {
     case TEXT:
-        printf("%s", strings[action->arg.text_str]);
+        printf("%s", get_string(action->arg.text_str));
     }
 
     exec_action(action->next);

@@ -48,9 +48,9 @@ void print_actions(struct action* actions) {
     for (struct action* act = actions; act; act = act->next) {
         printf("action %d, %p\n", act->type, act);
         if (act->type == TEXT)
-            printf("%s\n", strings[act->arg.text_str]);
+            printf("%s\n", get_string(act->arg.text_str));
         if (act->type == SHORT)
-            printf("%s\n", strings[act->arg.short_str]);
+            printf("%s\n", get_string(act->arg.short_str));
         if (act->type == OPTIONS)
             print_options(act->arg.options);
     }
@@ -58,7 +58,7 @@ void print_actions(struct action* actions) {
 
 void print_options(struct option* options) {
     for (struct option* opt = options; opt; opt = opt->next) {
-        printf("option %p %s\n", opt, strings[opt->text]);
+        printf("option %p %s\n", opt, get_string(opt->text));
         print_actions(opt->actions);
     }
 }
@@ -86,12 +86,6 @@ int main(int argc, char** argv) {
         if (syms[i][0] == '\0')
             break;
         printf("%d: (%zd)%s\n", i, strlen(syms[i]), syms[i]);
-    }
-
-    for (int i = 0; i < N_STRINGS; i++) {
-        if (strings[i] == NULL)
-            break;
-        printf("%d: %s\n", i, strings[i]);
     }
 
     for (int i = 0; i < N_WHENS; i++) {
