@@ -4,8 +4,6 @@
 #include "action.h"
 #include "expr.h"
 
-#define N_WHENS 256
-
 struct when {
     struct expression* condition;
     struct action* actions;

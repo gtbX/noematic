@@ -1,6 +1,8 @@
 #include "when.h"
 #include <stdlib.h>
 
+#define N_WHENS 256
+
 struct when* whens[N_WHENS] = { 0 };
 int n_whens = 0;
 
