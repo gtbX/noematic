@@ -30,7 +30,7 @@ void free_action(struct action* action) {
     free(action);
 }
 
-void exec_action(struct action* action) {
+void exec_actions(struct action* action) {
     if (!action)
         return;
 
@@ -41,5 +41,5 @@ void exec_action(struct action* action) {
         add_options(action->arg.options);
     }
 
-    exec_action(action->next);
+    exec_actions(action->next);
 }

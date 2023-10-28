@@ -25,7 +25,7 @@ void clear_options();
 /* get the size of the active option list */
 int option_count();
 
-/* get the option at the given position of the active option list */
-struct option* get_option(int i);
+/* evaluate the option list against the given string. return true if an option is executed */
+int eval_options(const char* input);
 
 #endif  // OPTION_H

@@ -1,7 +1,9 @@
 #include "option.h"
 
 #include <stdlib.h>
+#include <string.h>
 
+#include "strtable.h"
 #include "y.tab.h"
 
 #define N_OPTS 16
@@ -46,8 +48,21 @@ int option_count() {
     return n_opts;
 }
 
-struct option* get_option(int i) {
-    if (i < 0 || i >= n_opts)
-        return NULL;
-    return active[i];
+int eval_option(struct option* opt, const char* input) {
+    if (strstr(get_string(opt->text), input) ||
+        strstr(get_string(opt->short_txt), input)) {
+        exec_actions(opt->actions);
+        return 1;
+    }
+    return 0;
+}
+
+int eval_options(const char* input) {
+    int i;
+    for(i = 0; i < n_opts; i++) {
+        if (eval_option(active[i], input)) {
+            return 1;
+        }
+    }
+    return 0;
 }

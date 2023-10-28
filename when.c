@@ -38,7 +38,7 @@ struct when* get_when(int i) {
 void exec_when(struct when* when) {
     if (!when)
         return;
-    exec_action(when->actions);
+    exec_actions(when->actions);
 }
 
 void eval_when(struct when* when) {

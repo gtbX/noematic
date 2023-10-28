@@ -33,7 +33,19 @@ int main(int argc, char** argv) {
 
     exec_when(get_when(0));
 
-    for (;option_count() > 0; clear_options()) {
+    while (option_count() > 0) {
+        char buf[64];
+
+        do {
+            int len;
+            fgets(buf, sizeof(buf), stdin);
+            len = strlen(buf);
+            if (len > 0 && buf[len - 1] == '\n')
+                buf[len - 1] = '\0';
+            printf("%s\n", buf);
+        } while(eval_options(buf) == 0);
+
+        clear_options();
         eval_whens();
     }
 

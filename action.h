@@ -21,8 +21,8 @@ struct action* create_action(int type);
 /* free the given action object */
 void free_action(struct action*);
 
-/* execute the given action */
-void exec_action(struct action*);
+/* execute the given actions */
+void exec_actions(struct action*);
 
 #endif  // ACTION_H
 
