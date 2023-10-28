@@ -31,8 +31,10 @@ int main(int argc, char** argv) {
 
     yyparse();
 
-    do {
-    } while (option_count() > 0);
+    exec_when(get_when(0));
+
+    while (option_count() > 0) {
+    }
 
     clear_whens();
     clear_strings();
