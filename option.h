@@ -15,8 +15,8 @@ struct option* create_option(int text, struct action* actions);
 /* free the given option object */
 void free_option(struct option*);
 
-/* add an option to the list of active options */
-void add_option(struct option* option);
+/* add a set of options to the list of active options */
+void add_options(struct option* options);
 
 /* clear the list of active options */
 void clear_options();

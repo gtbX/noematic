@@ -21,8 +21,11 @@ void free_option(struct option* option) {
     free(option);
 }
 
-void add_option(struct option* option) {
-    active[n_opts++] = option;
+void add_options(struct option* options) {
+    if (!options || n_opts >= N_OPTS)
+        return;
+    active[n_opts++] = options;
+    add_options(options->next);
 }
 
 void clear_options() {

@@ -69,7 +69,7 @@ clean:
 
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c strtable.h symtable.h y.tab.h
-action.o: action.h
+action.o: action.h option.h setter.h when.h
 expr.o: expr.c expr.h
 option.o: option.c option.h action.h
 setter.o: setter.c setter.h expr.h

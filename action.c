@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "parts.h"
+#include "option.h"
+#include "setter.h"
+#include "when.h"
 #include "strtable.h"
 #include "y.tab.h"
 
@@ -35,6 +37,8 @@ void exec_action(struct action* action) {
     switch (action->type) {
     case TEXT:
         printf("%s", get_string(action->arg.text_str));
+    case OPTIONS:
+        add_options(action->arg.options);
     }
 
     exec_action(action->next);
