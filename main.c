@@ -46,6 +46,7 @@ int main(int argc, char** argv) {
 
         clear_options();
         eval_whens();
+        clear_temp();
     }
 
     clear_whens();

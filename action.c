@@ -7,6 +7,7 @@
 #include "setter.h"
 #include "when.h"
 #include "strtable.h"
+#include "symtable.h"
 #include "y.tab.h"
 
 struct action* create_action(int type) {
@@ -37,8 +38,13 @@ void exec_actions(struct action* action) {
     switch (action->type) {
     case TEXT:
         printf("%s", get_string(action->arg.text_str));
+        break;
+    case GOTO:
+        set_temp(action->arg.goto_sym);
+        break;
     case OPTIONS:
         add_options(action->arg.options);
+        break;
     }
 
     exec_actions(action->next);

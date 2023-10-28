@@ -7,6 +7,8 @@
 
 char syms[N_SYMS][SYM_LEN] = { 0 };
 int vars[N_SYMS] = { 0 };
+int temp = -1;
+int scratch;
 
 /* get or add the symbol name to the table. returns the id. */
 int get_sym(const char* id) {
@@ -27,5 +29,17 @@ int get_sym(const char* id) {
 int* get_var(int i) {
     if (i < 0 || i >= N_SYMS)
         return NULL;
+    if (i == temp) {
+        scratch = 1;
+        return &scratch;
+    }
     return vars + i;
+}
+
+void set_temp(int id) {
+    temp = id;
+}
+
+void clear_temp() {
+    temp = -1;
 }
