@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 
     exec_when(get_when(0));
 
-    while (option_count() > 0) {
+    while (run_flag && option_count() > 0) {
         char buf[64];
 
         do {

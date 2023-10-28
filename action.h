@@ -1,7 +1,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-struct option;
+extern int run_flag;
 
 struct action {
     int type;

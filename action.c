@@ -10,6 +10,8 @@
 #include "symtable.h"
 #include "y_tab.h"
 
+int run_flag = 1;
+
 struct action* create_action(int type) {
     struct action* action = malloc(sizeof(struct action));
     action->type = type;
@@ -36,8 +38,14 @@ void exec_actions(struct action* action) {
         return;
 
     switch (action->type) {
+    case EXIT:
+        run_flag = 0;
+        break;
     case TEXT:
         printf("%s", get_string(action->arg.text_str));
+        break;
+    case SET:
+        set(action->arg.setter);
         break;
     case GOTO:
         set_temp(action->arg.goto_sym);
