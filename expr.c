@@ -9,6 +9,31 @@ struct expression* create_expression(int type) {
     return expr;
 }
 
+struct expression* create_sym_expression(int sym) {
+    struct expression* expr = create_expression(SYMBOL);
+    expr->symbol = sym;
+    return expr;
+}
+
+struct expression* create_val_expression(int val) {
+    struct expression* expr = create_expression(VALUE);
+    expr->value = val;
+    return expr;
+}
+
+struct expression* create_unary_expression(int type, struct expression* exp) {
+    struct expression* expr = create_expression(type);
+    expr->operands.rhs = exp;
+    return expr;
+}
+
+struct expression* create_binary_expression(int type, struct expression* lhs, struct expression* rhs) {
+    struct expression* expr = create_expression(type);
+    expr->operands.lhs = lhs;
+    expr->operands.rhs = rhs;
+    return expr;
+}
+
 void free_expression(struct expression* expr) {
     if (!expr)
         return;

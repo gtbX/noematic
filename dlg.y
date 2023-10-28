@@ -63,15 +63,15 @@ string          : STRING_DEF SYMBOL STRING              { *get_var($2) = $3; }
 when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
                 ;
 
-expression      : SYMBOL                                { $$ = create_expression(SYMBOL); $$->symbol = $1; }
-                | VALUE                                 { $$ = create_expression(VALUE); $$->value = $1; }
-                | NOT expression                        { $$ = create_expression(NOT); $$->operands.rhs = $2; }
+expression      : SYMBOL                                { $$ = create_sym_expression($1); }
+                | VALUE                                 { $$ = create_val_expression($1); }
+                | NOT expression                        { $$ = create_unary_expression(NOT, $2); }
                 | '(' expression ')'                    { $$ = $2; }
-                | expression AND expression             { $$ = create_expression(AND); $$->operands.lhs = $1; $$->operands.rhs = $3; }
-                | expression OR expression              { $$ = create_expression(OR); $$->operands.lhs = $1; $$->operands.rhs = $3; }
-                | expression EQUALS expression          { $$ = create_expression(EQUALS); $$->operands.lhs = $1; $$->operands.rhs = $3; }
-                | expression '>' expression             { $$ = create_expression('>'); $$->operands.lhs = $1; $$->operands.rhs = $3; }
-                | expression '<' expression             { $$ = create_expression('<'); $$->operands.lhs = $1; $$->operands.rhs = $3; }
+                | expression AND expression             { $$ = create_binary_expression(AND, $1, $3); }
+                | expression OR expression              { $$ = create_binary_expression(OR, $1, $3); }
+                | expression EQUALS expression          { $$ = create_binary_expression(EQUALS, $1, $3); }
+                | expression '>' expression             { $$ = create_binary_expression('>', $1, $3); }
+                | expression '<' expression             { $$ = create_binary_expression('<', $1, $3); }
                 ;
 
 action_block    : '{' action_list '}'                   { $$ = $2; }
@@ -84,14 +84,14 @@ action_list     : action action_list                    { $1->next = $2; $$ = $1
 action          : EXIT                                  { $$ = create_action(EXIT); }
                 | TEXT ':' STRING                       { $$ = create_action(TEXT); $$->arg.text_str = $3; }
                 | SHORT ':' STRING                      { $$ = create_action(SHORT); $$->arg.short_str = $3; }
-                | CLEAR ':' SYMBOL                      { $$ = create_action(SET); $$->arg.setter = create_setter(create_expression(VALUE), 0); $$->arg.setter->exp->value = 0; $$->arg.setter->sym = $3; }
+                | CLEAR ':' SYMBOL                      { $$ = create_action(SET); $$->arg.setter = create_setter(create_val_expression(0), 0); $$->arg.setter->sym = $3; }
                 | SET ':' setter                        { $$ = create_action(SET); $$->arg.setter = $3; }
                 | GOTO ':' SYMBOL                       { $$ = create_action(GOTO); $$->arg.goto_sym = $3; }
                 | OPTIONS ':' option_block              { $$ = create_action(OPTIONS); $$->arg.options = $3; }
                 ;
 
 setter          : SYMBOL ';' assignment                 { $$ = $3; $$->sym = $1; }
-                | SYMBOL                                { $$ = create_setter(create_expression(VALUE), 0); $$->exp->value = 1; $$->sym = $1; }
+                | SYMBOL                                { $$ = create_setter(create_val_expression(1), 0); $$->sym = $1; }
                 ;
 
 assignment      : '=' expression ';'                    { $$ = create_setter($2, 0); }
