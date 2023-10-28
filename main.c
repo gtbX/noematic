@@ -31,7 +31,8 @@ int main(int argc, char** argv) {
 
     yyparse();
 
-    exec_when(get_when(0));
+    exec_when(get_when(0)); // bootstrap
+    eval_whens();
 
     while (run_flag && option_count() > 0) {
         char buf[64];

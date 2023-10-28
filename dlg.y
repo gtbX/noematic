@@ -38,9 +38,10 @@ void yyerror(char*);
 %token NOT
 %token EQUALS
 
-%left EQUALS '>' '<'
 %left OR
 %left AND
+%left EQUALS
+%left '>' '<'
 %nonassoc NOT
 
 %type <expression> expression
