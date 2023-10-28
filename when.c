@@ -45,3 +45,10 @@ void eval_when(struct when* when) {
     if (eval(when->condition))
         exec_when(when);
 }
+
+void eval_whens() {
+    int i;
+    for (i = 0; i < n_whens; i++) {
+        eval_when(whens[i]);
+    }
+}

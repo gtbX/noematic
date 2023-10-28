@@ -29,4 +29,7 @@ void exec_when(struct when* when);
 /* if the condition of the given when evaluates to true, execute its actions */
 void eval_when(struct when* when);
 
+/* eval each when in the when list */
+void eval_whens();
+
 #endif  // WHEN_H

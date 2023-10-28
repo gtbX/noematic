@@ -33,7 +33,8 @@ int main(int argc, char** argv) {
 
     exec_when(get_when(0));
 
-    while (option_count() > 0) {
+    for (;option_count() > 0; clear_options()) {
+        eval_whens();
     }
 
     clear_whens();
