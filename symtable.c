@@ -2,6 +2,9 @@
 #include <string.h>
 #include "symtable.h"
 
+#define SYM_LEN 64
+#define N_SYMS 256
+
 char syms[N_SYMS][SYM_LEN] = { 0 };
 int vars[N_SYMS] = { 0 };
 
@@ -19,4 +22,10 @@ int get_sym(const char* id) {
         }
     }
     return -1;
+}
+
+int* get_var(int i) {
+    if (i < 0 || i >= N_SYMS)
+        return NULL;
+    return vars + i;
 }

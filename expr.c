@@ -30,7 +30,7 @@ int eval(struct expression* expr) {
     case VALUE:
         return expr->value;
     case SYMBOL:
-        return vars[expr->symbol];
+        return *get_var(expr->symbol);
     case NOT:
         return !eval(expr->operands.rhs);
     case AND:

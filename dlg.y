@@ -57,7 +57,7 @@ gamespec        : when
                 | string
                 ;
 
-string          : STRING_DEF SYMBOL STRING              { vars[$2] = $3; }
+string          : STRING_DEF SYMBOL STRING              { *get_var($2) = $3; }
                 ;
 
 when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
