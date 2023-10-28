@@ -1,5 +1,8 @@
 #include "option.h"
+
 #include <stdlib.h>
+
+#include "y.tab.h"
 
 #define N_OPTS 16
 
@@ -10,6 +13,13 @@ struct option* create_option(int text, struct action* actions) {
     struct option* option = malloc(sizeof(struct option));
     option->text = text;
     option->actions = actions;
+    // find and cache the SHORT action text
+    for (; actions != NULL; actions = actions->next) {
+        if (actions->type == SHORT) {
+            option->short_txt = actions->arg.short_str;
+            break;
+        }
+    }
     return option;
 }
 

@@ -4,7 +4,8 @@
 #include "action.h"
 
 struct option {
-    short text;
+    int text;
+    int short_txt;
     struct action* actions;
     struct option* next;
 };
