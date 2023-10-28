@@ -1,6 +1,7 @@
 #include "option.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "strtable.h"
@@ -14,6 +15,7 @@ int n_opts = 0;
 struct option* create_option(int text, struct action* actions) {
     struct option* option = malloc(sizeof(struct option));
     option->text = text;
+    option->short_txt = -1;
     option->actions = actions;
     // find and cache the SHORT action text
     for (; actions != NULL; actions = actions->next) {
@@ -57,12 +59,24 @@ int eval_option(struct option* opt, const char* input) {
     return 0;
 }
 
+void print_option(struct option* opt) {
+    int text = opt->short_txt >= 0 ? opt->short_txt : opt->text;
+    printf("%s\n", get_string(text));
+}
+
 int eval_options(const char* input) {
     int i;
-    for(i = 0; i < n_opts; i++) {
-        if (eval_option(active[i], input)) {
-            return 1;
+    if (input[0] != '\0') {
+        for(i = 0; i < n_opts; i++) {
+            if (eval_option(active[i], input)) {
+                return 1;
+            }
         }
+    }
+
+    printf("Options:\n");
+    for (i = 0; i < n_opts; i++) {
+        print_option(active[i]);
     }
     return 0;
 }

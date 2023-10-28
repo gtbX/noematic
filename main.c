@@ -42,7 +42,6 @@ int main(int argc, char** argv) {
             len = strlen(buf);
             if (len > 0 && buf[len - 1] == '\n')
                 buf[len - 1] = '\0';
-            printf("%s\n", buf);
         } while(eval_options(buf) == 0);
 
         clear_options();
