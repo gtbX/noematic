@@ -3,7 +3,8 @@
 #include <string.h>
 #include <errno.h>
 
-#include "parts.h"
+#include "when.h"
+#include "option.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "y.tab.h"

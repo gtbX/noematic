@@ -1,4 +1,4 @@
-#include "parts.h"
+#include "when.h"
 #include <stdlib.h>
 
 struct when* whens[N_WHENS] = { 0 };
@@ -21,18 +21,4 @@ void clear_whens() {
     while (n_whens > 0) {
         free_when(whens[--n_whens]);
     }
-}
-
-struct setter* create_setter(struct expression* exp, char mod) {
-    struct setter* setter = malloc(sizeof(struct setter));
-    setter->exp = exp;
-    setter->mod = mod;
-    return setter;
-}
-
-void free_setter(struct setter* setter) {
-    if (!setter)
-        return;
-    free_expression(setter->exp);
-    free(setter);
 }

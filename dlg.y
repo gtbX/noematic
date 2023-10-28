@@ -1,6 +1,9 @@
 %{
 #include <stdio.h>
-#include "parts.h"
+#include "action.h"
+#include "option.h"
+#include "setter.h"
+#include "when.h"
 #include "symtable.h"
 int yylex(void);
 void yyerror(char*);
