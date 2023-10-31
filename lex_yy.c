@@ -509,6 +509,7 @@ static int yy_more_len = 0;
 char *yytext;
 #line 1 "dlg.l"
 #line 2 "dlg.l"
+#define YY_NO_UNISTD_H
 #include <stdlib.h>
 #include "y_tab.h"
 #include "strtable.h"
@@ -516,9 +517,9 @@ char *yytext;
 void yyerror(char*);
 
 int extract_string(const char* str);
-#line 519 "<stdout>"
+#line 520 "<stdout>"
 
-#line 521 "<stdout>"
+#line 522 "<stdout>"
 
 #define INITIAL 0
 #define STRING_MODE 1
@@ -739,10 +740,10 @@ YY_DECL
 		}
 
 	{
-#line 13 "dlg.l"
+#line 16 "dlg.l"
 
 
-#line 745 "<stdout>"
+#line 746 "<stdout>"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -782,16 +783,12 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 126 );
+		while ( yy_current_state != 102 );
+		yy_cp = (yy_last_accepting_cpos);
+		yy_current_state = (yy_last_accepting_state);
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
-		if ( yy_act == 0 )
-			{ /* have to back up */
-			yy_cp = (yy_last_accepting_cpos);
-			yy_current_state = (yy_last_accepting_state);
-			yy_act = yy_accept[yy_current_state];
-			}
 
 		YY_DO_BEFORE_ACTION;
 
@@ -808,7 +805,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "dlg.l"
+#line 18 "dlg.l"
 ; /* skip BOM */
 	YY_BREAK
 case 2:
@@ -816,87 +813,87 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 16 "dlg.l"
+#line 19 "dlg.l"
 ; /* skip comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "dlg.l"
+#line 21 "dlg.l"
 return *yytext;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "dlg.l"
+#line 23 "dlg.l"
 return EXIT;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "dlg.l"
+#line 24 "dlg.l"
 return WHEN;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "dlg.l"
+#line 25 "dlg.l"
 return STRING_DEF;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "dlg.l"
+#line 26 "dlg.l"
 return TEXT;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "dlg.l"
+#line 27 "dlg.l"
 return SHORT;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "dlg.l"
+#line 28 "dlg.l"
 return CLEAR;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "dlg.l"
+#line 29 "dlg.l"
 return SET;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "dlg.l"
+#line 30 "dlg.l"
 return GOTO;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "dlg.l"
+#line 31 "dlg.l"
 return OPTIONS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "dlg.l"
+#line 32 "dlg.l"
 ; /* nothing */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 31 "dlg.l"
+#line 34 "dlg.l"
 return AND;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 32 "dlg.l"
+#line 35 "dlg.l"
 return OR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 33 "dlg.l"
+#line 36 "dlg.l"
 return NOT;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 34 "dlg.l"
+#line 37 "dlg.l"
 return EQUALS;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 36 "dlg.l"
+#line 39 "dlg.l"
 {
                         yylval.symbol = get_sym(yytext);
                         return SYMBOL;
@@ -904,13 +901,13 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 40 "dlg.l"
+#line 43 "dlg.l"
 { yylval.value = atoi(yytext); return VALUE; }
 	YY_BREAK
 case 20:
 /* rule 20 can match eol */
 YY_RULE_SETUP
-#line 42 "dlg.l"
+#line 45 "dlg.l"
 {
                         yytext[yyleng - 1] = '\0';
                         yylval.string = extract_string(yytext + 1);
@@ -919,12 +916,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "dlg.l"
+#line 51 "dlg.l"
 { BEGIN STRING_MODE; yymore(); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 49 "dlg.l"
+#line 52 "dlg.l"
 {
                         BEGIN 0;
                         yytext[yyleng - 2] = '\0';
@@ -935,21 +932,21 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 55 "dlg.l"
+#line 58 "dlg.l"
 yymore();
 	YY_BREAK
 case 24:
 /* rule 24 can match eol */
 YY_RULE_SETUP
-#line 57 "dlg.l"
+#line 60 "dlg.l"
 ; /* skip whitespace */
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 59 "dlg.l"
+#line 62 "dlg.l"
 ECHO;
 	YY_BREAK
-#line 952 "<stdout>"
+#line 949 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 	yyterminate();
@@ -1017,7 +1014,8 @@ case YY_STATE_EOF(STRING_MODE):
 
 			else
 				{
-				yy_cp = (yy_c_buf_p);
+				yy_cp = (yy_last_accepting_cpos);
+				yy_current_state = (yy_last_accepting_state);
 				goto yy_find_action;
 				}
 			}
@@ -1535,7 +1533,7 @@ static void yy_load_buffer_state  (void)
         b->yy_bs_column = 0;
     }
 
-        b->yy_is_interactive = file ? (isatty( fileno(file) ) > 0) : 0;
+        b->yy_is_interactive = 0;
     
 	errno = oerrno;
 }
@@ -1958,7 +1956,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 59 "dlg.l"
+#line 62 "dlg.l"
 
 
 int yywrap(void) {

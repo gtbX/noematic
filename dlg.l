@@ -1,4 +1,5 @@
 %{
+#define YY_NO_UNISTD_H
 #include <stdlib.h>
 #include "y_tab.h"
 #include "strtable.h"
@@ -7,6 +8,8 @@ void yyerror(char*);
 
 int extract_string(const char* str);
 %}
+
+%option never-interactive
 
 %x STRING_MODE
 

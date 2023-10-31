@@ -15,7 +15,7 @@ SOURCES += y_tab.c
 EXE = noematic
 
 # Flags for compilation (adding warnings are always good)
-CFLAGS := -Wall -Wno-unused-function -g
+CFLAGS := -std=c90 -Wall -Wno-unused-function -g
 
 # Flags for linking (none for the moment)
 LDFLAGS =
