@@ -7,7 +7,7 @@
 #include "option.h"
 #include "strtable.h"
 #include "symtable.h"
-#include "y.tab.h"
+#include "y_tab.h"
 
 extern FILE* yyin;
 extern int yy_flex_debug;

@@ -1,7 +1,7 @@
 #include "expr.h"
 #include <stdlib.h>
 #include "symtable.h"
-#include "y.tab.h"
+#include "y_tab.h"
 
 struct expression* create_expression(int type) {
     struct expression* expr = malloc(sizeof(struct expression));

@@ -1,6 +1,6 @@
 %{
 #include <stdlib.h>
-#include "y.tab.h"
+#include "y_tab.h"
 #include "strtable.h"
 #include "symtable.h"
 void yyerror(char*);

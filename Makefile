@@ -8,8 +8,8 @@ SOURCES += when.c
 SOURCES += strtable.c
 SOURCES += symtable.c
 
-SOURCES += lex.yy.c
-SOURCES += y.tab.c
+SOURCES += lex_yy.c
+SOURCES += y_tab.c
 
 # The name of the executable
 EXE = noematic
@@ -54,21 +54,21 @@ $(EXE): $(OBJECTS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
-y.tab.c y.tab.h: dlg.y
-	yacc -d $< -Wcounterexamples
+y_tab.c y_tab.h &: dlg.y
+	yacc -d $< -Wcounterexamples -o y_tab.c
 
-lex.yy.c: dlg.l
-	$(LEX) $(LEXFLAGS) $<
+lex_yy.c: dlg.l
+	$(LEX) $(LEXFLAGS) -t $< > $@
 
 # Target to clean up after us
 clean:
 	-rm -f $(EXE)      # Remove the executable file
 	-rm -f $(OBJECTS)  # Remove the object files
-	-rm -f y.tab.c y.tab.h # Remove yacc files
-	-rm -f lex.yy.c    # Remove lex file
+	-rm -f y_tab.c y_tab.h # Remove yacc files
+	-rm -f lex_yy.c    # Remove lex file
 
 # Finally we need to tell "make" what source and header file each object file depends on
-main.o: main.c strtable.h symtable.h y.tab.h
+main.o: main.c strtable.h symtable.h y_tab.h
 action.o: action.h option.h setter.h when.h
 expr.o: expr.c expr.h
 option.o: option.c option.h action.h
@@ -76,5 +76,5 @@ setter.o: setter.c setter.h expr.h
 when.o: when.c when.h action.h expr.h option.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
-lex.yy.c: y.tab.h strtable.h symtable.h
-y.tab.c: when.h symtable.h
+lex_yy.c: y_tab.h strtable.h symtable.h
+y_tab.c: when.h symtable.h

@@ -8,7 +8,7 @@
 #include "when.h"
 #include "strtable.h"
 #include "symtable.h"
-#include "y.tab.h"
+#include "y_tab.h"
 
 struct action* create_action(int type) {
     struct action* action = malloc(sizeof(struct action));

@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "strtable.h"
-#include "y.tab.h"
+#include "y_tab.h"
 
 #define N_OPTS 16
 
