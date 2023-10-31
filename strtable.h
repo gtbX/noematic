@@ -10,4 +10,4 @@ const char* get_string(int id);
 /* clear string table and allocated memory */
 void clear_strings();
 
-#endif  // STRING_TABLE_H
+#endif  /* STRING_TABLE_H */

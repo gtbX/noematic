@@ -18,4 +18,4 @@ void free_setter(struct setter*);
 /* execute the given setter */
 void set(struct setter*);
 
-#endif  // SETTER_H
+#endif /* SETTER_H */

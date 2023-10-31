@@ -17,7 +17,7 @@ struct option* create_option(int text, struct action* actions) {
     option->text = text;
     option->short_txt = -1;
     option->actions = actions;
-    // find and cache the SHORT action text
+    /* find and cache the SHORT action text */
     for (; actions != NULL; actions = actions->next) {
         if (actions->type == SHORT) {
             option->short_txt = actions->arg.short_str;

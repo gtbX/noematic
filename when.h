@@ -30,4 +30,4 @@ void eval_when(struct when* when);
 /* eval each when in the when list */
 void eval_whens();
 
-#endif  // WHEN_H
+#endif /* WHEN_H */

@@ -28,4 +28,4 @@ int option_count();
 /* evaluate the option list against the given string. return true if an option is executed */
 int eval_options(const char* input);
 
-#endif  // OPTION_H
+#endif /* OPTION_H */

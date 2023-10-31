@@ -13,4 +13,4 @@ void set_temp(int id);
 /* clear the temp variable, setting it back to what it was */
 void clear_temp();
 
-#endif  //SYM_TABLE_H
+#endif /* SYM_TABLE_H */

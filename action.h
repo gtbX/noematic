@@ -24,5 +24,4 @@ void free_action(struct action*);
 /* execute the given actions */
 void exec_actions(struct action*);
 
-#endif  // ACTION_H
-
+#endif /* ACTION_H */
