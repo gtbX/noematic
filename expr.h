@@ -10,7 +10,7 @@ struct expression {
             struct expression* lhs;
             struct expression* rhs;
         } operands;
-    };
+    } e;
 };
 
 /* create a new symbol expression for the given symbol */

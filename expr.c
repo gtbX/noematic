@@ -11,26 +11,26 @@ struct expression* create_expression(int type) {
 
 struct expression* create_sym_expression(int sym) {
     struct expression* expr = create_expression(SYMBOL);
-    expr->symbol = sym;
+    expr->e.symbol = sym;
     return expr;
 }
 
 struct expression* create_val_expression(int val) {
     struct expression* expr = create_expression(VALUE);
-    expr->value = val;
+    expr->e.value = val;
     return expr;
 }
 
 struct expression* create_unary_expression(int type, struct expression* exp) {
     struct expression* expr = create_expression(type);
-    expr->operands.rhs = exp;
+    expr->e.operands.rhs = exp;
     return expr;
 }
 
 struct expression* create_binary_expression(int type, struct expression* lhs, struct expression* rhs) {
     struct expression* expr = create_expression(type);
-    expr->operands.lhs = lhs;
-    expr->operands.rhs = rhs;
+    expr->e.operands.lhs = lhs;
+    expr->e.operands.rhs = rhs;
     return expr;
 }
 
@@ -43,9 +43,9 @@ void free_expression(struct expression* expr) {
     case EQUALS:
     case '>':
     case '<':
-        free_expression(expr->operands.lhs);
+        free_expression(expr->e.operands.lhs);
     case NOT:
-        free_expression(expr->operands.rhs);
+        free_expression(expr->e.operands.rhs);
     }
     free(expr);
 }
@@ -53,21 +53,21 @@ void free_expression(struct expression* expr) {
 int eval(struct expression* expr) {
     switch(expr->type) {
     case VALUE:
-        return expr->value;
+        return expr->e.value;
     case SYMBOL:
-        return *get_var(expr->symbol);
+        return *get_var(expr->e.symbol);
     case NOT:
-        return !eval(expr->operands.rhs);
+        return !eval(expr->e.operands.rhs);
     case AND:
-        return eval(expr->operands.lhs) && eval(expr->operands.rhs);
+        return eval(expr->e.operands.lhs) && eval(expr->e.operands.rhs);
     case OR:
-        return eval(expr->operands.lhs) || eval(expr->operands.rhs);
+        return eval(expr->e.operands.lhs) || eval(expr->e.operands.rhs);
     case EQUALS:
-        return eval(expr->operands.lhs) == eval(expr->operands.rhs);
+        return eval(expr->e.operands.lhs) == eval(expr->e.operands.rhs);
     case '<':
-        return eval(expr->operands.lhs) < eval(expr->operands.rhs);
+        return eval(expr->e.operands.lhs) < eval(expr->e.operands.rhs);
     case '>':
-        return eval(expr->operands.lhs) > eval(expr->operands.rhs);
+        return eval(expr->e.operands.lhs) > eval(expr->e.operands.rhs);
     }
     return 0;
 }
