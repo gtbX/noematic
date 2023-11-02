@@ -1,4 +1,5 @@
-void filter_utf8(char* str) {
+#include "utf8.h"
+char* filter_utf8(char* str) {
     char* a = str, *b = str;
     do {
         if (!(*b & 0x80)) {
@@ -21,4 +22,5 @@ void filter_utf8(char* str) {
             *a++ = decode_point(cp);
         }
     } while (*b != '\0');
+    return str;
 }
