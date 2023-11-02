@@ -5,7 +5,7 @@ char* filter_utf8(char* str) {
         if (!(*b & 0x80)) {
             *a++ = *b++; /* pass through ASCII unmodified */
         } else {
-            int cp;
+            unsigned int cp;
             if ((*b & 0xE0) == 0xC0) {
                 cp = (*b++ & ~0xE0) << 6;
                 cp |= (*b++ & ~0xC0);
