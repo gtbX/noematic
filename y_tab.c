@@ -477,7 +477,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   84
+#define YYLAST   90
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  30
@@ -537,10 +537,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    52,    52,    53,    56,    57,    60,    63,    66,    67,
-      68,    69,    70,    71,    72,    73,    74,    77,    80,    81,
-      84,    85,    86,    87,    88,    89,    90,    93,    94,    97,
-      98,    99,   102,   105,   106,   109
+       0,    53,    53,    54,    57,    58,    61,    64,    67,    68,
+      69,    70,    71,    72,    73,    74,    75,    78,    81,    82,
+      85,    86,    87,    88,    89,    90,    91,    94,    95,    98,
+      99,   100,   103,   106,   107,   110
 };
 #endif
 
@@ -586,13 +586,13 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -37,     5,   -37,    -7,    12,   -37,   -37,   -37,    -1,     6,
+     -37,     5,   -37,     0,    22,   -37,   -37,   -37,    -1,     6,
      -37,   -37,    -1,    -1,    51,   -37,   -37,    59,    -1,    -1,
-      -1,    -1,    -1,    -2,   -37,   -37,    10,    14,    14,    14,
-      50,   -37,   -37,    13,    15,    22,    23,    25,    28,     7,
-      50,    34,    46,    52,    62,    65,    31,   -37,   -37,   -37,
-     -37,   -37,    54,   -37,   -37,    67,   -37,   -10,    50,    58,
-      67,    -1,    49,    56,   -37,   -37,   -37,   -37,     8,    -1,
+      -1,    -1,    -1,    15,   -37,    11,    35,    -5,   -37,   -37,
+      50,   -37,   -37,    14,    23,    40,    43,    47,    55,    16,
+      50,    42,    46,    73,    79,    80,    61,   -37,   -37,   -37,
+     -37,   -37,    60,   -37,   -37,    82,   -37,   -10,    50,    64,
+      82,    -1,    58,    62,   -37,   -37,   -37,   -37,     8,    -1,
       -1,   -37,    17,    26,   -37,   -37
 };
 
@@ -615,7 +615,7 @@ static const yytype_int8 yydefact[] =
 static const yytype_int8 yypgoto[] =
 {
      -37,   -37,   -37,   -37,   -37,   -12,   -37,   -36,   -37,   -37,
-     -37,   -37,    24,   -37
+     -37,   -37,    30,   -37
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -631,27 +631,29 @@ static const yytype_int8 yydefgoto[] =
 static const yytype_int8 yytable[] =
 {
       16,    17,    10,    11,    48,     2,    25,    26,    27,    28,
-      29,    15,     3,     4,     8,     9,    12,    61,    62,    63,
-      13,    30,    65,    18,    19,    18,    20,    21,    22,    18,
-      19,    47,    18,    19,    71,    20,    21,    22,    41,    49,
-      42,    18,    19,    74,    20,    21,    22,    43,    44,    68,
-      45,    50,    75,    46,    55,    51,    32,    72,    73,    33,
-      34,    35,    36,    37,    38,    52,    18,    19,    54,    20,
-      21,    22,    58,    23,    18,    19,    69,    20,    21,    22,
-      57,    24,    66,    70,    67
+      29,    15,     3,     4,    21,    22,    12,    61,    62,    63,
+      13,     8,    65,    18,    19,     9,    20,    21,    22,    20,
+      21,    22,    18,    19,    71,    20,    21,    22,    30,    41,
+      47,    18,    19,    74,    20,    21,    22,    49,    42,    68,
+      18,    50,    75,    20,    21,    22,    32,    72,    73,    33,
+      34,    35,    36,    37,    38,    43,    18,    19,    44,    20,
+      21,    22,    45,    23,    18,    19,    51,    20,    21,    22,
+      46,    24,    52,    54,    55,    69,    57,    58,    66,    70,
+      67
 };
 
 static const yytype_int8 yycheck[] =
 {
       12,    13,     3,     4,    40,     0,    18,    19,    20,    21,
-      22,     5,     7,     8,    21,     3,    17,    27,    28,    29,
-      21,    23,    58,    15,    16,    15,    18,    19,    20,    15,
-      16,    24,    15,    16,    26,    18,    19,    20,    25,     5,
-      25,    15,    16,    26,    18,    19,    20,    25,    25,    61,
-      25,     5,    26,    25,    23,     3,     6,    69,    70,     9,
-      10,    11,    12,    13,    14,     3,    15,    16,     3,    18,
-      19,    20,     5,    22,    15,    16,    27,    18,    19,    20,
-      26,    22,    24,    27,    60
+      22,     5,     7,     8,    19,    20,    17,    27,    28,    29,
+      21,    21,    58,    15,    16,     3,    18,    19,    20,    18,
+      19,    20,    15,    16,    26,    18,    19,    20,    23,    25,
+      24,    15,    16,    26,    18,    19,    20,     5,    25,    61,
+      15,     5,    26,    18,    19,    20,     6,    69,    70,     9,
+      10,    11,    12,    13,    14,    25,    15,    16,    25,    18,
+      19,    20,    25,    22,    15,    16,     3,    18,    19,    20,
+      25,    22,     3,     3,    23,    27,    26,     5,    24,    27,
+      60
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -1147,187 +1149,187 @@ yyreduce:
   switch (yyn)
     {
   case 6: /* string: STRING_DEF SYMBOL STRING  */
-#line 60 "dlg.y"
+#line 61 "dlg.y"
                                                         { *get_var((yyvsp[-1].symbol)) = (yyvsp[0].string); }
-#line 1153 "y_tab.c"
+#line 1155 "y_tab.c"
     break;
 
   case 7: /* when: WHEN '(' expression ')' action_block  */
-#line 63 "dlg.y"
+#line 64 "dlg.y"
                                                         { create_when((yyvsp[-2].expression), (yyvsp[0].action)); }
-#line 1159 "y_tab.c"
+#line 1161 "y_tab.c"
     break;
 
   case 8: /* expression: SYMBOL  */
-#line 66 "dlg.y"
+#line 67 "dlg.y"
                                                         { (yyval.expression) = create_sym_expression((yyvsp[0].symbol)); }
-#line 1165 "y_tab.c"
+#line 1167 "y_tab.c"
     break;
 
   case 9: /* expression: VALUE  */
-#line 67 "dlg.y"
+#line 68 "dlg.y"
                                                         { (yyval.expression) = create_val_expression((yyvsp[0].value)); }
-#line 1171 "y_tab.c"
+#line 1173 "y_tab.c"
     break;
 
   case 10: /* expression: NOT expression  */
-#line 68 "dlg.y"
+#line 69 "dlg.y"
                                                         { (yyval.expression) = create_unary_expression(NOT, (yyvsp[0].expression)); }
-#line 1177 "y_tab.c"
+#line 1179 "y_tab.c"
     break;
 
   case 11: /* expression: '(' expression ')'  */
-#line 69 "dlg.y"
+#line 70 "dlg.y"
                                                         { (yyval.expression) = (yyvsp[-1].expression); }
-#line 1183 "y_tab.c"
+#line 1185 "y_tab.c"
     break;
 
   case 12: /* expression: expression AND expression  */
-#line 70 "dlg.y"
+#line 71 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(AND, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1189 "y_tab.c"
+#line 1191 "y_tab.c"
     break;
 
   case 13: /* expression: expression OR expression  */
-#line 71 "dlg.y"
+#line 72 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(OR, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1195 "y_tab.c"
+#line 1197 "y_tab.c"
     break;
 
   case 14: /* expression: expression EQUALS expression  */
-#line 72 "dlg.y"
+#line 73 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(EQUALS, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1201 "y_tab.c"
+#line 1203 "y_tab.c"
     break;
 
   case 15: /* expression: expression '>' expression  */
-#line 73 "dlg.y"
+#line 74 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression('>', (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1207 "y_tab.c"
+#line 1209 "y_tab.c"
     break;
 
   case 16: /* expression: expression '<' expression  */
-#line 74 "dlg.y"
+#line 75 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression('<', (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1213 "y_tab.c"
+#line 1215 "y_tab.c"
     break;
 
   case 17: /* action_block: '{' action_list '}'  */
-#line 77 "dlg.y"
+#line 78 "dlg.y"
                                                         { (yyval.action) = (yyvsp[-1].action); }
-#line 1219 "y_tab.c"
+#line 1221 "y_tab.c"
     break;
 
   case 18: /* action_list: action action_list  */
-#line 80 "dlg.y"
+#line 81 "dlg.y"
                                                         { (yyvsp[-1].action)->next = (yyvsp[0].action); (yyval.action) = (yyvsp[-1].action); }
-#line 1225 "y_tab.c"
+#line 1227 "y_tab.c"
     break;
 
   case 19: /* action_list: %empty  */
-#line 81 "dlg.y"
+#line 82 "dlg.y"
                                                         { (yyval.action) = NULL; }
-#line 1231 "y_tab.c"
+#line 1233 "y_tab.c"
     break;
 
   case 20: /* action: EXIT  */
-#line 84 "dlg.y"
+#line 85 "dlg.y"
                                                         { (yyval.action) = create_action(EXIT); }
-#line 1237 "y_tab.c"
+#line 1239 "y_tab.c"
     break;
 
   case 21: /* action: TEXT ':' STRING  */
-#line 85 "dlg.y"
+#line 86 "dlg.y"
                                                         { (yyval.action) = create_action(TEXT); (yyval.action)->arg.text_str = (yyvsp[0].string); }
-#line 1243 "y_tab.c"
+#line 1245 "y_tab.c"
     break;
 
   case 22: /* action: SHORT ':' STRING  */
-#line 86 "dlg.y"
+#line 87 "dlg.y"
                                                         { (yyval.action) = create_action(SHORT); (yyval.action)->arg.short_str = (yyvsp[0].string); }
-#line 1249 "y_tab.c"
+#line 1251 "y_tab.c"
     break;
 
   case 23: /* action: CLEAR ':' SYMBOL  */
-#line 87 "dlg.y"
+#line 88 "dlg.y"
                                                         { (yyval.action) = create_action(SET); (yyval.action)->arg.setter = create_setter(create_val_expression(0), 0); (yyval.action)->arg.setter->sym = (yyvsp[0].symbol); }
-#line 1255 "y_tab.c"
+#line 1257 "y_tab.c"
     break;
 
   case 24: /* action: SET ':' setter  */
-#line 88 "dlg.y"
+#line 89 "dlg.y"
                                                         { (yyval.action) = create_action(SET); (yyval.action)->arg.setter = (yyvsp[0].setter); }
-#line 1261 "y_tab.c"
+#line 1263 "y_tab.c"
     break;
 
   case 25: /* action: GOTO ':' SYMBOL  */
-#line 89 "dlg.y"
+#line 90 "dlg.y"
                                                         { (yyval.action) = create_action(GOTO); (yyval.action)->arg.goto_sym = (yyvsp[0].symbol); }
-#line 1267 "y_tab.c"
+#line 1269 "y_tab.c"
     break;
 
   case 26: /* action: OPTIONS ':' option_block  */
-#line 90 "dlg.y"
+#line 91 "dlg.y"
                                                         { (yyval.action) = create_action(OPTIONS); (yyval.action)->arg.options = (yyvsp[0].option); }
-#line 1273 "y_tab.c"
+#line 1275 "y_tab.c"
     break;
 
   case 27: /* setter: SYMBOL ';' assignment  */
-#line 93 "dlg.y"
+#line 94 "dlg.y"
                                                         { (yyval.setter) = (yyvsp[0].setter); (yyval.setter)->sym = (yyvsp[-2].symbol); }
-#line 1279 "y_tab.c"
+#line 1281 "y_tab.c"
     break;
 
   case 28: /* setter: SYMBOL  */
-#line 94 "dlg.y"
+#line 95 "dlg.y"
                                                         { (yyval.setter) = create_setter(create_val_expression(1), 0); (yyval.setter)->sym = (yyvsp[0].symbol); }
-#line 1285 "y_tab.c"
+#line 1287 "y_tab.c"
     break;
 
   case 29: /* assignment: '=' expression ';'  */
-#line 97 "dlg.y"
+#line 98 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), 0); }
-#line 1291 "y_tab.c"
+#line 1293 "y_tab.c"
     break;
 
   case 30: /* assignment: '+' '=' expression ';'  */
-#line 98 "dlg.y"
+#line 99 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), 1); }
-#line 1297 "y_tab.c"
+#line 1299 "y_tab.c"
     break;
 
   case 31: /* assignment: '-' '=' expression ';'  */
-#line 99 "dlg.y"
+#line 100 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), -1); }
-#line 1303 "y_tab.c"
+#line 1305 "y_tab.c"
     break;
 
   case 32: /* option_block: '{' option_list '}'  */
-#line 102 "dlg.y"
+#line 103 "dlg.y"
                                                         { (yyval.option) = (yyvsp[-1].option); }
-#line 1309 "y_tab.c"
+#line 1311 "y_tab.c"
     break;
 
   case 33: /* option_list: option option_list  */
-#line 105 "dlg.y"
+#line 106 "dlg.y"
                                                         { (yyvsp[-1].option)->next = (yyvsp[0].option); (yyval.option) = (yyvsp[-1].option); }
-#line 1315 "y_tab.c"
+#line 1317 "y_tab.c"
     break;
 
   case 34: /* option_list: %empty  */
-#line 106 "dlg.y"
+#line 107 "dlg.y"
                                                         { (yyval.option) = NULL; }
-#line 1321 "y_tab.c"
+#line 1323 "y_tab.c"
     break;
 
   case 35: /* option: STRING action_list  */
-#line 109 "dlg.y"
+#line 110 "dlg.y"
                                                         { (yyval.option) = create_option((yyvsp[-1].string), (yyvsp[0].action)); }
-#line 1327 "y_tab.c"
+#line 1329 "y_tab.c"
     break;
 
 
-#line 1331 "y_tab.c"
+#line 1333 "y_tab.c"
 
       default: break;
     }
@@ -1520,7 +1522,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 111 "dlg.y"
+#line 112 "dlg.y"
 
 
 void yyerror(char *s) {

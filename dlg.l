@@ -2,11 +2,13 @@
 #define YY_NO_UNISTD_H
 #include <stdlib.h>
 #include "y_tab.h"
+#include "cp.h"
 #include "strtable.h"
 #include "symtable.h"
+#include "utf8.h"
 void yyerror(char*);
 
-int extract_string(const char* str);
+int extract_string(char* str);
 %}
 
 %option never-interactive
@@ -65,10 +67,12 @@ int yywrap(void) {
     return 1;
 }
 
-int extract_string(const char* str) {
+int extract_string(char* str) {
     char* eq = strchr(str, '=');
     if (eq != NULL) {
-        return add_string(++eq);
+        eq = filter_utf8(++eq);
+        return add_string(eq);
     }
+    str = filter_utf8(str);
     return add_string(str);
 }

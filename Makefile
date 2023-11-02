@@ -7,6 +7,7 @@ SOURCES += setter.c
 SOURCES += when.c
 SOURCES += strtable.c
 SOURCES += symtable.c
+SOURCES += utf8nop.c
 
 SOURCES += lex_yy.c
 SOURCES += y_tab.c
@@ -76,5 +77,6 @@ setter.o: setter.c setter.h expr.h
 when.o: when.c when.h action.h expr.h option.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
-lex_yy.c: y_tab.h strtable.h symtable.h
+utf8nop.o: utf8.h
+lex_yy.c: y_tab.h strtable.h symtable.h utf8.h
 y_tab.c: when.h symtable.h
