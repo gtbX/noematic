@@ -2,6 +2,6 @@
 #define CP_H
 
 /* decode the given Unicode codepoint into a character in the local charset */
-char decode_point(unsigned int cp);
+char decode_point(unsigned long cp);
 
 #endif /* CP_H */

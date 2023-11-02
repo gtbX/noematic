@@ -1,6 +1,6 @@
 #include "cp.h"
 
-char decode_point(unsigned int cp) {
+char decode_point(unsigned long cp) {
     if (cp < 128)
 	return (char)cp;
 
