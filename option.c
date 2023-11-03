@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "strtable.h"
+#include "symtable.h"
 #include "y_tab.h"
 
 #define N_OPTS 16
@@ -69,6 +70,7 @@ int eval_options(const char* input) {
     if (input[0] != '\0') {
         for(i = 0; i < n_opts; i++) {
             if (eval_option(active[i], input)) {
+                dump_syms();
                 return 1;
             }
         }

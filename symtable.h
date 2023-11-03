@@ -13,4 +13,7 @@ void set_temp(int id);
 /* clear the temp variable, setting it back to what it was */
 void clear_temp();
 
+/* print the contents of the symbol table */
+void dump_syms();
+
 #endif /* SYM_TABLE_H */
