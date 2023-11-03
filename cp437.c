@@ -5,7 +5,13 @@ char decode_point(unsigned long cp) {
 	return (char)cp;
 
     switch (cp) {
-    case 0x2591: return 0xB0;
+    case 0x00A7: return 0x15; /* section sign */
+    case 0x00E1: return 0xA0; /* a with acute */
+
+    case 0x2013: return 0xC4; /* en dash */
+    case 0x2019: return '\'';  /* right single quote */
+
+    case 0x2591: return 0xB0; /* block and box drawing glyphs */
     case 0x2592: return 0xB1;
     case 0x2593: return 0xB2;
     case 0x2502: return 0xB3;
@@ -53,7 +59,7 @@ char decode_point(unsigned long cp) {
     case 0x2588: return 0xDB;
     case 0x2584: return 0xDC;
     case 0x258C: return 0xDD;
-    case 0x2590: return 0xBE;
+    case 0x2590: return 0xDE;
     case 0x2580: return 0xDF;
     }
 
