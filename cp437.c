@@ -7,6 +7,9 @@ char decode_point(unsigned long cp) {
     switch (cp) {
     case 0x00A7: return 0x15; /* section sign */
     case 0x00E1: return 0xA0; /* a with acute */
+    case 0x00E2: return 0x83; /* a with circumflex */
+    case 0x00E9: return 0x82; /* e with acute */
+    case 0x00F1: return 0xA4; /* n with tilde */
 
     case 0x2013: return 0xC4; /* en dash */
     case 0x2019: return '\'';  /* right single quote */
