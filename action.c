@@ -9,6 +9,7 @@
 #include "when.h"
 #include "strtable.h"
 #include "symtable.h"
+#include "text.h"
 #include "y_tab.h"
 
 int run_flag = 1;
@@ -47,7 +48,7 @@ void exec_actions(struct action* action) {
         run_flag = 0;
         break;
     case TEXT:
-        printf("%s", get_string(action->arg.text_str));
+        print_text(get_string(action->arg.text_str));
         break;
     case SET:
         set(action->arg.setter);

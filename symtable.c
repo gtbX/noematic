@@ -3,7 +3,6 @@
 #include <string.h>
 #include "symtable.h"
 
-#define SYM_LEN 64
 #define N_SYMS 256
 
 char syms[N_SYMS][SYM_LEN] = { 0 };

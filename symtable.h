@@ -1,6 +1,8 @@
 #ifndef SYM_TABLE_H
 #define SYM_TABLE_H
 
+#define SYM_LEN 64
+
 /* get or add the symbol name to the table. returns the id. */
 int get_sym(const char* name);
 

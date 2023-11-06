@@ -7,6 +7,7 @@ SOURCES += setter.c
 SOURCES += when.c
 SOURCES += strtable.c
 SOURCES += symtable.c
+SOURCES += text.c
 SOURCES += utf8nop.c
 
 SOURCES += lex_yy.c
@@ -70,13 +71,14 @@ clean:
 
 # Finally we need to tell "make" what source and header file each object file depends on
 main.o: main.c strtable.h symtable.h y_tab.h
-action.o: action.h option.h setter.h when.h
+action.o: action.h option.h setter.h text.h when.h
 expr.o: expr.c expr.h
 option.o: option.c option.h action.h
 setter.o: setter.c setter.h expr.h
 when.o: when.c when.h action.h expr.h option.h
 strtable.o: strtable.c strtable.h
 symtable.o: symtable.c symtable.h
+text.o: strtable.h symtable.h text.h
 utf8nop.o: utf8.h
 lex_yy.c: y_tab.h strtable.h symtable.h utf8.h
 y_tab.c: when.h symtable.h

@@ -32,3 +32,12 @@ void clear_strings() {
         free(strings[--id]);
     }
 }
+
+void dump_strings() {
+    int i;
+    for (i = 0; i < N_STRINGS; i++) {
+        if (!strings[i])
+            break;
+        printf("%d %s\n", i, strings[i]);
+    }
+}
