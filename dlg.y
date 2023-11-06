@@ -50,12 +50,10 @@ void yyerror(char*);
 %type <option> option_block option_list option
 
 %%
-game            : game gamespec
-                |
-                ;
-
-gamespec        : when
+game            : when
                 | string
+                | game when
+                | game string
                 ;
 
 string          : STRING_DEF SYMBOL STRING              { *get_var($2) = $3; }

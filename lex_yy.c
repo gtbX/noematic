@@ -16,6 +16,7 @@
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
 /* begin standard C headers. */
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -32,8 +33,8 @@
 
 #if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 
-/* C99 says to define __STDC_LIMIT_MACROS before including stdint.h,
- * if you want the limit (max/min) macros for int types. 
+/* C++ systems might need __STDC_LIMIT_MACROS defined before including
+ * <stdint.h>, if you want the limit (max/min) macros for int types.
  */
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS 1
@@ -519,9 +520,9 @@ char *yytext;
 void yyerror(char*);
 
 int extract_string(char* str);
-#line 522 "<stdout>"
+#line 523 "<stdout>"
 
-#line 524 "<stdout>"
+#line 525 "<stdout>"
 
 #define INITIAL 0
 #define STRING_MODE 1
@@ -745,7 +746,7 @@ YY_DECL
 #line 18 "dlg.l"
 
 
-#line 748 "<stdout>"
+#line 749 "<stdout>"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -948,7 +949,7 @@ YY_RULE_SETUP
 #line 64 "dlg.l"
 ECHO;
 	YY_BREAK
-#line 951 "<stdout>"
+#line 952 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 	yyterminate();
