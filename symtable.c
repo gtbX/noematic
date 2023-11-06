@@ -38,12 +38,12 @@ int* get_var(int i) {
 }
 
 void set_temp(int id) {
-    printf("set temp %s\n", syms[id]);
+    printf("set temp %s (%d)\n", syms[id], id);
     temp = id;
 }
 
 void clear_temp() {
-    printf("clear temp %s\n", syms[temp]);
+    printf("clear temp %s (%d)\n", syms[temp], temp);
     temp = -1;
 }
 
