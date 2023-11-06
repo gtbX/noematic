@@ -51,7 +51,7 @@ void free_expression(struct expression* expr) {
 }
 
 int eval(struct expression* expr) {
-    switch(expr->type) {
+    switch (expr->type) {
     case VALUE:
         return expr->e.value;
     case SYMBOL:
@@ -70,4 +70,33 @@ int eval(struct expression* expr) {
         return eval(expr->e.operands.lhs) > eval(expr->e.operands.rhs);
     }
     return 0;
+}
+
+void print_expr(struct expression* expr) {
+    switch (expr->type) {
+    case VALUE:
+        printf("%d", expr->e.value);
+        break;
+    case SYMBOL:
+        printf("%s(%d)", get_sym_name(expr->e.symbol), *get_var(expr->e.symbol));
+        break;
+    case NOT:
+        printf("(not ");
+        print_expr(expr->e.operands.rhs);
+        printf(" )");
+        break;
+    default:
+        printf("( ");
+        print_expr(expr->e.operands.lhs);
+        switch (expr->type) {
+        case AND: printf(" and "); break;
+        case OR: printf(" or "); break;
+        case EQUALS: printf(" == "); break;
+        case '<': printf(" < "); break;
+        case '>': printf(" > "); break;
+        }
+        print_expr(expr->e.operands.rhs);
+        printf(" )");
+        break;
+    }
 }

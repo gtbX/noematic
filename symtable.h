@@ -2,7 +2,10 @@
 #define SYM_TABLE_H
 
 /* get or add the symbol name to the table. returns the id. */
-int get_sym(const char* id);
+int get_sym(const char* name);
+
+/* get the symbol name for the given id */
+const char* get_sym_name(int id);
 
 /* get a pointer to the variable associated with the given id. */
 int* get_var(int id);

@@ -44,8 +44,13 @@ void exec_when(struct when* when) {
 void eval_when(struct when* when) {
     if (!when)
         return;
-    if (eval(when->condition))
+    printf("evaluating when ( ");
+    print_expr(when->condition);
+    printf(" ) = %d\n", eval(when->condition));
+    if (eval(when->condition)) {
+        printf("executing\n");
         exec_when(when);
+    }
 }
 
 void eval_whens() {

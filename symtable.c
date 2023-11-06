@@ -27,6 +27,12 @@ int get_sym(const char* id) {
     return -1;
 }
 
+const char* get_sym_name(int i) {
+    if (i < 0 || i >= N_SYMS)
+        return "";
+    return syms[i];
+}
+
 int* get_var(int i) {
     if (i < 0 || i >= N_SYMS)
         return NULL;
