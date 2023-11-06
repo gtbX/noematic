@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "expr.h"
+#include "setter.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "y_tab.h"

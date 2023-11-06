@@ -5,6 +5,7 @@
 
 #include "when.h"
 #include "option.h"
+#include "setter.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "y_tab.h"

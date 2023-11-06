@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "option.h"
+#include "setter.h"
+
 #define N_WHENS 256
 
 struct when* whens[N_WHENS] = { 0 };

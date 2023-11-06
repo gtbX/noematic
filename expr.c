@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "action.h"
+#include "option.h"
+#include "setter.h"
 #include "symtable.h"
 #include "y_tab.h"
 
