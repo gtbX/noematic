@@ -70,7 +70,9 @@ int eval_options(const char* input) {
     if (input[0] != '\0') {
         for(i = 0; i < n_opts; i++) {
             if (eval_option(active[i], input)) {
+#ifdef DEBUG
                 dump_syms();
+#endif
                 return 1;
             }
         }

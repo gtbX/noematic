@@ -44,12 +44,16 @@ int* get_var(int i) {
 }
 
 void set_temp(int id) {
+#ifdef DEBUG
     printf("set temp %s (%d)\n", syms[id], id);
+#endif
     temp = id;
 }
 
 void clear_temp() {
+#ifdef DEBUG
     printf("clear temp %s (%d)\n", syms[temp], temp);
+#endif
     temp = -1;
 }
 
