@@ -1,5 +1,6 @@
 #include "option.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -15,6 +16,10 @@ int n_opts = 0;
 
 struct option* create_option(int text, struct action* actions) {
     struct option* option = malloc(sizeof(struct option));
+    if (!option) {
+        perror("create_option: malloc");
+        exit(errno);
+    }
     option->text = text;
     option->short_txt = -1;
     option->actions = actions;

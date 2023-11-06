@@ -1,12 +1,18 @@
 #include "setter.h"
 
+#include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "expr.h"
 #include "symtable.h"
 
 struct setter* create_setter(struct expression* exp, char mod) {
     struct setter* setter = malloc(sizeof(struct setter));
+    if (!setter) {
+        perror("create_setter: malloc");
+        exit(errno);
+    }
     setter->exp = exp;
     setter->mod = mod;
     return setter;

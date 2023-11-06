@@ -1,5 +1,6 @@
 #include "action.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -14,6 +15,10 @@ int run_flag = 1;
 
 struct action* create_action(int type) {
     struct action* action = malloc(sizeof(struct action));
+    if (!action) {
+        perror("create_action: malloc");
+        exit(errno);
+    }
     action->type = type;
     return action;
 }

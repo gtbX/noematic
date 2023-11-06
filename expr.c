@@ -1,5 +1,6 @@
 #include "expr.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -8,6 +9,10 @@
 
 struct expression* create_expression(int type) {
     struct expression* expr = malloc(sizeof(struct expression));
+    if (!expr) {
+        perror("create_expression: malloc");
+        exit(errno);
+    }
     expr->type = type;
     return expr;
 }
