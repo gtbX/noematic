@@ -2,7 +2,12 @@
 #define YY_NO_UNISTD_H
 #include <stdlib.h>
 #include "y_tab.h"
+
+#include "action.h"
 #include "cp.h"
+#include "expr.h"
+#include "option.h"
+#include "setter.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "utf8.h"

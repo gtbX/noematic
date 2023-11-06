@@ -1,6 +1,9 @@
-#include <stdlib.h>
-#include <string.h>
 #include "strtable.h"
+
+#include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #define N_STRINGS 512
 
@@ -11,6 +14,10 @@ int add_string(const char* string) {
     if (string[0] == '\0')
         return -1;
     strings[id] = strdup(string);
+    if (!strings[id]) {
+        perror("add_string: strdup");
+        exit(errno);
+    }
     return id++;
 }
 

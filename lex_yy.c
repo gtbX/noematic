@@ -513,16 +513,21 @@ char *yytext;
 #define YY_NO_UNISTD_H
 #include <stdlib.h>
 #include "y_tab.h"
+
+#include "action.h"
 #include "cp.h"
+#include "expr.h"
+#include "option.h"
+#include "setter.h"
 #include "strtable.h"
 #include "symtable.h"
 #include "utf8.h"
 void yyerror(char*);
 
 int extract_string(char* str);
-#line 523 "<stdout>"
+#line 528 "<stdout>"
 
-#line 525 "<stdout>"
+#line 530 "<stdout>"
 
 #define INITIAL 0
 #define STRING_MODE 1
@@ -743,10 +748,10 @@ YY_DECL
 		}
 
 	{
-#line 18 "dlg.l"
+#line 23 "dlg.l"
 
 
-#line 749 "<stdout>"
+#line 754 "<stdout>"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -808,7 +813,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 20 "dlg.l"
+#line 25 "dlg.l"
 ; /* skip BOM */
 	YY_BREAK
 case 2:
@@ -816,87 +821,87 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 21 "dlg.l"
+#line 26 "dlg.l"
 ; /* skip comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "dlg.l"
+#line 28 "dlg.l"
 return *yytext;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 25 "dlg.l"
+#line 30 "dlg.l"
 return EXIT;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 26 "dlg.l"
+#line 31 "dlg.l"
 return WHEN;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 27 "dlg.l"
+#line 32 "dlg.l"
 return STRING_DEF;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "dlg.l"
+#line 33 "dlg.l"
 return TEXT;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "dlg.l"
+#line 34 "dlg.l"
 return SHORT;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 30 "dlg.l"
+#line 35 "dlg.l"
 return CLEAR;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 31 "dlg.l"
+#line 36 "dlg.l"
 return SET;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 32 "dlg.l"
+#line 37 "dlg.l"
 return GOTO;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 33 "dlg.l"
+#line 38 "dlg.l"
 return OPTIONS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 34 "dlg.l"
+#line 39 "dlg.l"
 ; /* nothing */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 36 "dlg.l"
+#line 41 "dlg.l"
 return AND;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "dlg.l"
+#line 42 "dlg.l"
 return OR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 38 "dlg.l"
+#line 43 "dlg.l"
 return NOT;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 39 "dlg.l"
+#line 44 "dlg.l"
 return EQUALS;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 41 "dlg.l"
+#line 46 "dlg.l"
 {
                         yylval.symbol = get_sym(yytext);
                         return SYMBOL;
@@ -904,13 +909,13 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 45 "dlg.l"
+#line 50 "dlg.l"
 { yylval.value = atoi(yytext); return VALUE; }
 	YY_BREAK
 case 20:
 /* rule 20 can match eol */
 YY_RULE_SETUP
-#line 47 "dlg.l"
+#line 52 "dlg.l"
 {
                         yytext[yyleng - 1] = '\0';
                         yylval.string = extract_string(yytext + 1);
@@ -919,12 +924,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 53 "dlg.l"
+#line 58 "dlg.l"
 { BEGIN STRING_MODE; yymore(); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 54 "dlg.l"
+#line 59 "dlg.l"
 {
                         BEGIN 0;
                         yytext[yyleng - 2] = '\0';
@@ -935,21 +940,21 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 60 "dlg.l"
+#line 65 "dlg.l"
 yymore();
 	YY_BREAK
 case 24:
 /* rule 24 can match eol */
 YY_RULE_SETUP
-#line 62 "dlg.l"
+#line 67 "dlg.l"
 ; /* skip whitespace */
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 64 "dlg.l"
+#line 69 "dlg.l"
 ECHO;
 	YY_BREAK
-#line 952 "<stdout>"
+#line 957 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 	yyterminate();
@@ -1959,7 +1964,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 64 "dlg.l"
+#line 69 "dlg.l"
 
 
 int yywrap(void) {

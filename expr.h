@@ -31,4 +31,7 @@ void free_expression(struct expression* expr);
 /* evaluate the expression, returning the value */
 int eval(struct expression* expr);
 
+/* print the expression and evaluation to stdout */
+void print_expr(struct expression*);
+
 #endif /* EXPR_H */

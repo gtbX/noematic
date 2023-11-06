@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "symtable.h"
 
@@ -26,6 +27,12 @@ int get_sym(const char* id) {
     return -1;
 }
 
+const char* get_sym_name(int i) {
+    if (i < 0 || i >= N_SYMS)
+        return "";
+    return syms[i];
+}
+
 int* get_var(int i) {
     if (i < 0 || i >= N_SYMS)
         return NULL;
@@ -37,9 +44,30 @@ int* get_var(int i) {
 }
 
 void set_temp(int id) {
+#ifdef DEBUG
+    printf("set temp %s (%d)\n", syms[id], id);
+#endif
     temp = id;
 }
 
 void clear_temp() {
+#ifdef DEBUG
+    printf("clear temp %s (%d)\n", syms[temp], temp);
+#endif
     temp = -1;
+}
+
+void dump_syms() {
+    int i;
+    for (i = 0; i < N_SYMS; i++) {
+        if (syms[i][0] == '\0')
+            break;
+        if (vars[i] == 0)
+            continue;
+        printf("%d %s\t\t", i, syms[i]);
+        if (i == temp)
+            printf("(1)\n");
+        else
+            printf("%d\n", vars[i]);
+    }
 }

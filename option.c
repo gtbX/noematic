@@ -1,10 +1,14 @@
 #include "option.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+#include "expr.h"
+#include "setter.h"
 #include "strtable.h"
+#include "symtable.h"
 #include "y_tab.h"
 
 #define N_OPTS 16
@@ -14,6 +18,10 @@ int n_opts = 0;
 
 struct option* create_option(int text, struct action* actions) {
     struct option* option = malloc(sizeof(struct option));
+    if (!option) {
+        perror("create_option: malloc");
+        exit(errno);
+    }
     option->text = text;
     option->short_txt = -1;
     option->actions = actions;
@@ -69,6 +77,9 @@ int eval_options(const char* input) {
     if (input[0] != '\0') {
         for(i = 0; i < n_opts; i++) {
             if (eval_option(active[i], input)) {
+#ifdef DEBUG
+                dump_syms();
+#endif
                 return 1;
             }
         }
