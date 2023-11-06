@@ -1,5 +1,7 @@
 #include "when.h"
+
 #include <stdlib.h>
+#include <stdio.h>
 
 #define N_WHENS 256
 
@@ -8,8 +10,15 @@ int n_whens = 0;
 
 int create_when(struct expression* expression, struct action* actions) {
     whens[n_whens] = malloc(sizeof(struct when));
+    if (!whens[n_whens]) {
+        perror("create_when: malloc");
+        exit(-1);
+    }
     whens[n_whens]->condition = expression;
     whens[n_whens]->actions = actions;
+    printf("Creating when[%d](", n_whens);
+    print_expr(expression);
+    printf(")\n");
     return n_whens++;
 }
 

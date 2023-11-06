@@ -1,5 +1,8 @@
 #include "expr.h"
+
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "symtable.h"
 #include "y_tab.h"
 
