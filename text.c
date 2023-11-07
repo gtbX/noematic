@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+#include "slow.h"
 #include "strtable.h"
 #include "symtable.h"
 
@@ -44,6 +45,8 @@ void print_text(const char* text) {
             }
         } else {
             putchar(*text++);
+            fflush(stdout);
+            slow_char(1);
         }
     }
 }
