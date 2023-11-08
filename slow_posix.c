@@ -3,6 +3,9 @@
 #include <unistd.h>
 
 void slow_char(int chars) {
-    /* 5000us = 1/200s */
-    usleep(chars * 10000);
+    usleep(chars * 1000000 / CPS);
+}
+
+void wait(int n) {
+    usleep(n * WAIT_MS * 1000);
 }

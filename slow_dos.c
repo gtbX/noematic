@@ -3,5 +3,9 @@
 #include <dos.h>
 
 void slow_char(int chars) {
-	delay(1000 / CPS);
+	delay(chars * 1000 / CPS);
+}
+
+void wait(int n) {
+	delay(n * WAIT_MS);
 }

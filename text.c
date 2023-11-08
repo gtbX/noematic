@@ -1,5 +1,6 @@
 #include "text.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "slow.h"
@@ -27,6 +28,17 @@ int get_sym_var(const char** str) {
     return -1;
 }
 
+int get_num_arg(const char** str) {
+    char buf[8] = "0", *num = buf;
+    size_t n = 0;
+    while (**str >= '0' && **str <= '9' && n < sizeof(buf) - 1) {
+        *num++ = *(*str)++;
+        n++;
+    }
+    *num = '\0';
+    return atoi(buf);
+}
+
 void print_text(const char* text) {
     while (*text) {
         if (*text == '%') {
@@ -38,6 +50,11 @@ void print_text(const char* text) {
             case 'T':
             case 't':
                 print_text(get_string(get_sym_var(&text)));
+                break;
+            case 'W':
+            case 'w':
+                text++;
+                wait(get_num_arg(&text));
                 break;
             default:
                 putchar('%');
