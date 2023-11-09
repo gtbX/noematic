@@ -1,5 +1,6 @@
 #include "option.h"
 
+#include <ctype.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -58,9 +59,25 @@ int option_count() {
     return n_opts;
 }
 
+const char* stristr(const char* haystack, const char* needle) {
+    const char* hptr = haystack, *nptr = needle, *ptr = NULL;
+    while (*hptr && *nptr) {
+        if (toupper(*hptr) == toupper(*nptr)) {
+            if (!ptr)
+                ptr = hptr;
+            nptr++;
+        } else {
+            nptr = needle;
+            ptr = NULL;
+        }
+        hptr++;
+    }
+    return ptr;
+}
+
 int eval_option(struct option* opt, const char* input) {
-    if (strstr(get_string(opt->text), input) ||
-        strstr(get_string(opt->short_txt), input)) {
+    if (stristr(get_string(opt->text), input) ||
+        stristr(get_string(opt->short_txt), input)) {
         exec_actions(opt->actions);
         return 1;
     }
