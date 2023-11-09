@@ -72,7 +72,7 @@ const char* stristr(const char* haystack, const char* needle) {
         }
         hptr++;
     }
-    return ptr;
+    return *nptr ? NULL : ptr;
 }
 
 int eval_option(struct option* opt, const char* input) {
@@ -100,7 +100,11 @@ int eval_options(const char* input) {
                 return 1;
             }
         }
+    } else if (n_opts == 1) {
+        exec_actions(active[0]->actions);
+        return 1;
     }
+
 
     printf("Options:\n");
     for (i = 0; i < n_opts; i++) {
