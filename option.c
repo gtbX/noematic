@@ -75,10 +75,13 @@ const char* stristr(const char* haystack, const char* needle) {
     return *nptr ? NULL : ptr;
 }
 
+void exec_option(struct option* opt) {
+    exec_actions(opt->actions);
+}
+
 int eval_option(struct option* opt, const char* input) {
     if (stristr(get_string(opt->text), input) ||
         stristr(get_string(opt->short_txt), input)) {
-        exec_actions(opt->actions);
         return 1;
     }
     return 0;
@@ -90,25 +93,41 @@ void print_option(struct option* opt) {
 }
 
 int eval_options(const char* input) {
-    int i;
+    struct option* matched[N_OPTS];
+    int n_matched = 0, i;
     if (input[0] != '\0') {
         for(i = 0; i < n_opts; i++) {
             if (eval_option(active[i], input)) {
-#ifdef DEBUG
-                dump_syms();
-#endif
-                return 1;
+                matched[n_matched++] = active[i];
             }
         }
     } else if (n_opts == 1) {
-        exec_actions(active[0]->actions);
+        exec_option(active[0]);
         return 1;
     }
 
+    if (n_matched == 1) {
+        exec_option(matched[0]);
+#ifdef DEBUG
+        dump_syms();
+#endif
+        return 1;
+    } else {
+        struct option** list;
+        int n;
+        if (n_matched > 1) {
+            printf("Which?\n");
+            list = matched;
+            n = n_matched;
+        } else {
+            printf("Options:\n");
+            list = active;
+            n = n_opts;
+        }
 
-    printf("Options:\n");
-    for (i = 0; i < n_opts; i++) {
-        print_option(active[i]);
+        for (i = 0; i < n; i++) {
+            print_option(list[i]);
+        }
     }
     return 0;
 }
