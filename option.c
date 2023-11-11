@@ -8,8 +8,10 @@
 
 #include "expr.h"
 #include "setter.h"
+#include "slow.h"
 #include "strtable.h"
 #include "symtable.h"
+#include "text.h"
 #include "y_tab.h"
 
 #define N_OPTS 16
@@ -76,6 +78,10 @@ const char* stristr(const char* haystack, const char* needle) {
 }
 
 void exec_option(struct option* opt) {
+    print_text("> ");
+    print_text(get_string(opt->text));
+    print_text("\n");
+    wait(3);
     exec_actions(opt->actions);
 }
 
