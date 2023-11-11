@@ -61,7 +61,8 @@ int option_count() {
     return n_opts;
 }
 
-const char* stristr(const char* haystack, const char* needle) {
+/* returns 1 if haystack contains needle, 2 if strings are the same; else 0 */
+int str_match(const char* haystack, const char* needle) {
     const char* hptr = haystack, *nptr = needle, *ptr = NULL;
     while (*hptr && *nptr) {
         if (toupper(*hptr) == toupper(*nptr)) {
@@ -74,7 +75,13 @@ const char* stristr(const char* haystack, const char* needle) {
         }
         hptr++;
     }
-    return *nptr ? NULL : ptr;
+    if (*nptr) {
+        return 0; /* no match */
+    }
+    if (ptr == haystack && !*hptr) { /* exact match */
+        return 2;
+    }
+    return 1;
 }
 
 void exec_option(struct option* opt) {
@@ -85,12 +92,16 @@ void exec_option(struct option* opt) {
     exec_actions(opt->actions);
 }
 
+/* 2 on exact match of short or long texts,
+ * 1 on partial match of either,
+ * 0 on no match */
 int eval_option(struct option* opt, const char* input) {
-    if (stristr(get_string(opt->text), input) ||
-        stristr(get_string(opt->short_txt), input)) {
-        return 1;
+    int t_match = str_match(get_string(opt->text), input);
+    if (t_match < 2) {
+        int s_match = str_match(get_string(opt->short_txt), input);
+        return t_match > s_match ? t_match : s_match;
     }
-    return 0;
+    return t_match;
 }
 
 void print_option(struct option* opt) {
@@ -103,7 +114,11 @@ int eval_options(const char* input) {
     int n_matched = 0, i;
     if (input[0] != '\0') {
         for(i = 0; i < n_opts; i++) {
-            if (eval_option(active[i], input)) {
+            int match = eval_option(active[i], input);
+            if (match > 1) {
+                exec_option(active[i]);
+                return 1;
+            } else if (match > 0) {
                 matched[n_matched++] = active[i];
             }
         }
