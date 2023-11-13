@@ -39,8 +39,8 @@ int main(int argc, char** argv) {
         char buf[64];
 
         do {
-            printf("> ");
             int len;
+            printf("> ");
             fgets(buf, sizeof(buf), stdin);
             len = strlen(buf);
             if (len > 0 && buf[len - 1] == '\n')
