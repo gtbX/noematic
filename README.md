@@ -13,9 +13,10 @@ Noematic requires the original dialog files extracted from The "Talos Principle"
 
 To extract, navigate to your game installation directory. For Steam users, right click on the game in your Library, then `Manage->Browse Local Game Files`.
 Enter the `Content/Talos` subfolder and note the `*.gro` files.
-These are actually renamed `.zip` files, and can be opened by any zip extractor.Depending on which one you open, there may be a `Content/Talos/Databases/ComputerTerminalDialogs` folder containing `.dlg` files. These are the files that Noematic operates on.
+These are actually renamed `.zip` files, and can be opened by any zip extractor.
+Depending on which one you open, there may be a `Content/Talos/Databases/ComputerTerminalDialogs` folder containing `.dlg` files. These are the files that Noematic operates on.
 
-Once extracted from the game archive(s), you can run them by providing them as a command line argument to the `noematic` binary (`NOEMATIC.EXE` on DOS).
+Once extracted from the game archive(s), you can run a dialog by providing it as a command line argument to the `noematic` binary (`NOEMATIC.EXE` on DOS).
 For example:
 
 ```
@@ -25,7 +26,7 @@ noematic.exe DLC_Aaru.dlg
 ## Limitations
 
 Many of the text adventures included in "Road to Gehenna" will operate standalone like this.
-However, most of the game dialog expects to run as part of the larger game, and won't operate as expected.
+However, most of the game dialogs expect to run as part of the larger game, and won't operate properly.
 In particular, the `include` directive is not (yet) implemented, so cross-linking between .dlg files won't work.
 Also, anything that keys off of events in the 3D game world won't work, for reasons that should be obvious.
 
