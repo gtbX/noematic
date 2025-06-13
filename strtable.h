@@ -1,8 +1,10 @@
 #ifndef STRING_TABLE_H
 #define STRING_TABLE_H
 
+#include <stdio.h>
+
 /* add the string to the table, returning its index */
-int add_string(const char* string, int off, int len);
+int add_string(FILE* file, int off, int len);
 
 /* get the string referenced by the given id */
 const char* get_string(int id);

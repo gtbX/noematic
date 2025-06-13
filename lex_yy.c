@@ -523,14 +523,16 @@ char *yytext;
 #include "utf8.h"
 void yyerror(char*);
 
+extern FILE *yyin;
+
 int pos = 0;
 
 void advance(int len);
 
-int extract_string(char* str, int off, int len);
-#line 531 "<stdout>"
-
+int extract_string(const char* str, int off, int len);
 #line 533 "<stdout>"
+
+#line 535 "<stdout>"
 
 #define INITIAL 0
 #define STRING_MODE 1
@@ -751,10 +753,10 @@ YY_DECL
 		}
 
 	{
-#line 27 "dlg.l"
+#line 29 "dlg.l"
 
 
-#line 757 "<stdout>"
+#line 759 "<stdout>"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -816,7 +818,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 29 "dlg.l"
+#line 31 "dlg.l"
 advance(yyleng); /* skip BOM */
 	YY_BREAK
 case 2:
@@ -824,87 +826,87 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 30 "dlg.l"
+#line 32 "dlg.l"
 advance(yyleng); /* skip comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 32 "dlg.l"
+#line 34 "dlg.l"
 advance(yyleng); return *yytext;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 34 "dlg.l"
+#line 36 "dlg.l"
 advance(yyleng); return EXIT;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 35 "dlg.l"
+#line 37 "dlg.l"
 advance(yyleng); return WHEN;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 36 "dlg.l"
+#line 38 "dlg.l"
 advance(yyleng); return STRING_DEF;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 37 "dlg.l"
+#line 39 "dlg.l"
 advance(yyleng); return TEXT;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 38 "dlg.l"
+#line 40 "dlg.l"
 advance(yyleng); return SHORT;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 39 "dlg.l"
+#line 41 "dlg.l"
 advance(yyleng); return CLEAR;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 40 "dlg.l"
+#line 42 "dlg.l"
 advance(yyleng); return SET;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 41 "dlg.l"
+#line 43 "dlg.l"
 advance(yyleng); return GOTO;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 42 "dlg.l"
+#line 44 "dlg.l"
 advance(yyleng); return OPTIONS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 43 "dlg.l"
+#line 45 "dlg.l"
 advance(yyleng); /* nothing */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 45 "dlg.l"
+#line 47 "dlg.l"
 advance(yyleng); return AND;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 46 "dlg.l"
+#line 48 "dlg.l"
 advance(yyleng); return OR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 47 "dlg.l"
+#line 49 "dlg.l"
 advance(yyleng); return NOT;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 48 "dlg.l"
+#line 50 "dlg.l"
 advance(yyleng); return EQUALS;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 50 "dlg.l"
+#line 52 "dlg.l"
 {
                         yylval.symbol = get_sym(yytext);
                         advance(yyleng);
@@ -913,7 +915,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 55 "dlg.l"
+#line 57 "dlg.l"
 {
                         yylval.value = atoi(yytext);
                         advance(yyleng);
@@ -923,7 +925,7 @@ YY_RULE_SETUP
 case 20:
 /* rule 20 can match eol */
 YY_RULE_SETUP
-#line 61 "dlg.l"
+#line 63 "dlg.l"
 {
                         yytext[yyleng - 1] = '\0';
                         yylval.string = extract_string(yytext + 1, pos + 1, yyleng - 2);
@@ -933,12 +935,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 68 "dlg.l"
+#line 70 "dlg.l"
 { BEGIN STRING_MODE; yymore(); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 69 "dlg.l"
+#line 71 "dlg.l"
 {
                         BEGIN 0;
                         yytext[yyleng - 2] = '\0';
@@ -950,21 +952,21 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 76 "dlg.l"
+#line 78 "dlg.l"
 yymore();
 	YY_BREAK
 case 24:
 /* rule 24 can match eol */
 YY_RULE_SETUP
-#line 78 "dlg.l"
+#line 80 "dlg.l"
 advance(yyleng); /* skip whitespace */
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 80 "dlg.l"
+#line 82 "dlg.l"
 ECHO;
 	YY_BREAK
-#line 967 "<stdout>"
+#line 969 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 	yyterminate();
@@ -1974,7 +1976,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 80 "dlg.l"
+#line 82 "dlg.l"
 
 
 int yywrap(void) {
@@ -1985,15 +1987,13 @@ void advance(int len) {
     pos += len;
 }
 
-int extract_string(char* str, int off, int len) {
-    char* eq = strchr(str, '=');
+int extract_string(const char* str, int off, int len) {
+    const char* eq = strchr(str, '=');
     if (eq != NULL) {
         eq++;
         off += (eq - str);
         len -= (eq - str);
-        str = eq;
     }
-    str = filter_utf8(str);
-    return add_string(str, off, len);
+    return add_string(yyin, off, len);
 }
 

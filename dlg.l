@@ -13,11 +13,13 @@
 #include "utf8.h"
 void yyerror(char*);
 
+extern FILE *yyin;
+
 int pos = 0;
 
 void advance(int len);
 
-int extract_string(char* str, int off, int len);
+int extract_string(const char* str, int off, int len);
 %}
 
 %option never-interactive
@@ -87,14 +89,12 @@ void advance(int len) {
     pos += len;
 }
 
-int extract_string(char* str, int off, int len) {
-    char* eq = strchr(str, '=');
+int extract_string(const char* str, int off, int len) {
+    const char* eq = strchr(str, '=');
     if (eq != NULL) {
         eq++;
         off += (eq - str);
         len -= (eq - str);
-        str = eq;
     }
-    str = filter_utf8(str);
-    return add_string(str, off, len);
+    return add_string(yyin, off, len);
 }
