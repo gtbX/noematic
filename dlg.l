@@ -15,16 +15,21 @@ void yyerror(char*);
 
 extern FILE *yyin;
 
-int pos = 0;
+#define STACK_SIZE 16
+int pos_stack[STACK_SIZE] = { 0 }, *pos = pos_stack;
 
 void advance(int len);
 
 int extract_string(const char* str, int off, int len);
+
+const char* get_filename(const char* path);
 %}
 
 %option never-interactive
+%option yylineno
 
 %x STRING_MODE
+%x INCLUDE_MODE
 
 %%
 
@@ -62,22 +67,47 @@ int extract_string(const char* str, int off, int len);
 
 \"[^"\n]*["\n]      {
                         yytext[yyleng - 1] = '\0';
-                        yylval.string = extract_string(yytext + 1, pos + 1, yyleng - 2);
+                        yylval.string = extract_string(yytext + 1, *pos + 1, yyleng - 2);
                         advance(yyleng);
                         return STRING;
                     }
 
 "[["                { BEGIN STRING_MODE; yymore(); }
 <STRING_MODE>"]]"   {
-                        BEGIN 0;
+                        BEGIN INITIAL;
                         yytext[yyleng - 2] = '\0';
-                        yylval.string = extract_string(yytext + 2, pos + 2, yyleng - 4);
+                        yylval.string = extract_string(yytext + 2, *pos + 2, yyleng - 4);
                         advance(yyleng);
                         return STRING;
                     }
 <STRING_MODE>.|\n   yymore();
 
+include[ \t]*\"     advance(yyleng); BEGIN INCLUDE_MODE;
+<INCLUDE_MODE>[^\"]* advance(yyleng); {
+                        if (++pos >= pos_stack + STACK_SIZE) {
+                            fprintf(stderr, "Include depth limit reached!\n");
+                            exit(1);
+                        }
+                        *pos = 0;
+                        const char* filename = get_filename(yytext);
+                        yyin = fopen(filename, "rb");
+                        if (!yyin) {
+                            perror(filename);
+                            exit(1);
+                        }
+                        yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
+                        BEGIN INITIAL;
+                    }
+<INCLUDE_MODE>\"    advance(yyleng); BEGIN INITIAL;
+
 [ \t\r\n]           advance(yyleng); /* skip whitespace */
+
+<<EOF>>             {
+                        yypop_buffer_state();
+                        if (!YY_CURRENT_BUFFER)
+                            yyterminate();
+                        pos--;
+                    }
 
 %%
 
@@ -86,7 +116,7 @@ int yywrap(void) {
 }
 
 void advance(int len) {
-    pos += len;
+    *pos += len;
 }
 
 int extract_string(const char* str, int off, int len) {
@@ -97,4 +127,13 @@ int extract_string(const char* str, int off, int len) {
         len -= (eq - str);
     }
     return add_string(yyin, off, len);
+}
+
+const char* get_filename(const char* path) {
+    const char* slash = strrchr(path, '/');
+    if (!slash)
+        slash = strrchr(path, '\\');
+    if (!slash)
+        return path;
+    return slash + 1;
 }
