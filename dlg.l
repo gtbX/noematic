@@ -45,7 +45,7 @@ const char* get_filename(const char* path);
 "short"             advance(yyleng); return SHORT;
 "clear"             advance(yyleng); return CLEAR;
 "set"(local)?       advance(yyleng); return SET;
-(goto|next)         advance(yyleng); return GOTO;
+(goto|(auto)?next)  advance(yyleng); return GOTO;
 "options"           advance(yyleng); return OPTIONS;
 "notext"            advance(yyleng); /* nothing */
 
