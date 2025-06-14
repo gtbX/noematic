@@ -89,10 +89,9 @@ include[ \t]*\"     advance(yyleng); BEGIN INCLUDE_MODE;
                             exit(1);
                         }
                         *pos = 0;
-                        const char* filename = get_filename(yytext);
-                        yyin = fopen(filename, "rb");
+                        yyin = fopen(yytext, "rb");
                         if (!yyin) {
-                            perror(filename);
+                            perror(yytext);
                             exit(1);
                         }
                         yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
@@ -127,13 +126,4 @@ int extract_string(const char* str, int off, int len) {
         len -= (eq - str);
     }
     return add_string(yyin, off, len);
-}
-
-const char* get_filename(const char* path) {
-    const char* slash = strrchr(path, '/');
-    if (!slash)
-        slash = strrchr(path, '\\');
-    if (!slash)
-        return path;
-    return slash + 1;
 }

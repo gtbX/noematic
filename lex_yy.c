@@ -1024,10 +1024,9 @@ advance(yyleng); {
                             exit(1);
                         }
                         *pos = 0;
-                        const char* filename = get_filename(yytext);
-                        yyin = fopen(filename, "rb");
+                        yyin = fopen(yytext, "rb");
                         if (!yyin) {
-                            perror(filename);
+                            perror(yytext);
                             exit(1);
                         }
                         yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
@@ -1036,19 +1035,19 @@ advance(yyleng); {
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 101 "dlg.l"
+#line 100 "dlg.l"
 advance(yyleng); BEGIN INITIAL;
 	YY_BREAK
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 103 "dlg.l"
+#line 102 "dlg.l"
 advance(yyleng); /* skip whitespace */
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 case YY_STATE_EOF(INCLUDE_MODE):
-#line 105 "dlg.l"
+#line 104 "dlg.l"
 {
                         yypop_buffer_state();
                         if (!YY_CURRENT_BUFFER)
@@ -1058,10 +1057,10 @@ case YY_STATE_EOF(INCLUDE_MODE):
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 112 "dlg.l"
+#line 111 "dlg.l"
 ECHO;
 	YY_BREAK
-#line 1064 "<stdout>"
+#line 1063 "<stdout>"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2079,7 +2078,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 112 "dlg.l"
+#line 111 "dlg.l"
 
 
 int yywrap(void) {
@@ -2098,14 +2097,5 @@ int extract_string(const char* str, int off, int len) {
         len -= (eq - str);
     }
     return add_string(yyin, off, len);
-}
-
-const char* get_filename(const char* path) {
-    const char* slash = strrchr(path, '/');
-    if (!slash)
-        slash = strrchr(path, '\\');
-    if (!slash)
-        return path;
-    return slash + 1;
 }
 
