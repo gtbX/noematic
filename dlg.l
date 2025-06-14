@@ -42,6 +42,7 @@ const char* get_filename(const char* path);
 (terminal|player)" when" advance(yyleng); return WHEN;
 "string"            advance(yyleng); return STRING_DEF;
 (show_)?"text"      advance(yyleng); return TEXT;
+"prompt"            advance(yyleng); return TEXT;
 "short"             advance(yyleng); return SHORT;
 "clear"             advance(yyleng); return CLEAR;
 "set"(local)?       advance(yyleng); return SET;
