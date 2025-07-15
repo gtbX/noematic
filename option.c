@@ -28,10 +28,16 @@ struct option* create_option(int text, struct action* actions) {
     option->text = text;
     option->short_txt = -1;
     option->actions = actions;
-    /* find and cache the SHORT action text */
+    /* find and cache the action texts */
     for (; actions != NULL; actions = actions->next) {
-        if (actions->type == SHORT) {
+        if (option->short_txt < 0 && actions->type == SHORT) {
             option->short_txt = actions->arg.short_str;
+        }
+        if (option->text < 0 && actions->type == TEXT) {
+            option->text = actions->arg.text_str;
+            actions->arg.text_str = -1;
+        }
+        if (option->short_txt >= 0 && option->text >= 0) {
             break;
         }
     }

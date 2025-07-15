@@ -58,18 +58,20 @@ extern int yydebug;
     VALUE = 259,                   /* VALUE  */
     STRING = 260,                  /* STRING  */
     EXIT = 261,                    /* EXIT  */
-    WHEN = 262,                    /* WHEN  */
-    STRING_DEF = 263,              /* STRING_DEF  */
-    TEXT = 264,                    /* TEXT  */
-    SHORT = 265,                   /* SHORT  */
-    CLEAR = 266,                   /* CLEAR  */
-    SET = 267,                     /* SET  */
-    GOTO = 268,                    /* GOTO  */
-    OPTIONS = 269,                 /* OPTIONS  */
-    AND = 270,                     /* AND  */
-    OR = 271,                      /* OR  */
-    NOT = 272,                     /* NOT  */
-    EQUALS = 273                   /* EQUALS  */
+    PLAYER = 262,                  /* PLAYER  */
+    TERMINAL = 263,                /* TERMINAL  */
+    WHEN = 264,                    /* WHEN  */
+    STRING_DEF = 265,              /* STRING_DEF  */
+    TEXT = 266,                    /* TEXT  */
+    SHORT = 267,                   /* SHORT  */
+    CLEAR = 268,                   /* CLEAR  */
+    SET = 269,                     /* SET  */
+    GOTO = 270,                    /* GOTO  */
+    OPTIONS = 271,                 /* OPTIONS  */
+    AND = 272,                     /* AND  */
+    OR = 273,                      /* OR  */
+    NOT = 274,                     /* NOT  */
+    EQUALS = 275                   /* EQUALS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -82,18 +84,20 @@ extern int yydebug;
 #define VALUE 259
 #define STRING 260
 #define EXIT 261
-#define WHEN 262
-#define STRING_DEF 263
-#define TEXT 264
-#define SHORT 265
-#define CLEAR 266
-#define SET 267
-#define GOTO 268
-#define OPTIONS 269
-#define AND 270
-#define OR 271
-#define NOT 272
-#define EQUALS 273
+#define PLAYER 262
+#define TERMINAL 263
+#define WHEN 264
+#define STRING_DEF 265
+#define TEXT 266
+#define SHORT 267
+#define CLEAR 268
+#define SET 269
+#define GOTO 270
+#define OPTIONS 271
+#define AND 272
+#define OR 273
+#define NOT 274
+#define EQUALS 275
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -109,7 +113,7 @@ union YYSTYPE
     struct setter* setter;
     struct option* option;
 
-#line 113 "y_tab.h"
+#line 117 "y_tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
