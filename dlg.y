@@ -26,6 +26,8 @@ extern int yylineno, *pos;
 %token <string> STRING
 
 %token EXIT
+%token PLAYER
+%token TERMINAL
 %token WHEN
 %token STRING_DEF
 %token TEXT
@@ -61,7 +63,12 @@ game            : when
 string          : STRING_DEF SYMBOL STRING              { *get_var($2) = $3; }
                 ;
 
-when            : WHEN '(' expression ')' action_block  { create_when($3, $5); }
+when            : TERMINAL WHEN '(' expression ')' action_block  { create_when($4, $6); }
+                | PLAYER WHEN '(' expression ')' action_block {
+                    struct action *act = create_action(OPTIONS);
+                    act->arg.options = create_option(-1, $6);
+                    create_when($4, act);
+                }
                 ;
 
 expression      : SYMBOL                                { $$ = create_sym_expression($1); }

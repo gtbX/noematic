@@ -39,7 +39,9 @@ const char* get_filename(const char* path);
 [-+=()<>{};:]       advance(yyleng); return *yytext;
 
 "exit"              advance(yyleng); return EXIT;
-(terminal|player)" when" advance(yyleng); return WHEN;
+"terminal"          advance(yyleng); return TERMINAL;
+"player"            advance(yyleng); return PLAYER;
+"when"              advance(yyleng); return WHEN;
 "string"            advance(yyleng); return STRING_DEF;
 (show_)?"text"      advance(yyleng); return TEXT;
 "prompt"            advance(yyleng); return TEXT;
