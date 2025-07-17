@@ -71,16 +71,12 @@ clean:
 	-rm -f lex_yy.c    # Remove lex file
 
 # Finally we need to tell "make" what source and header file each object file depends on
-main.o: main.c strtable.h symtable.h y_tab.h
-action.o: action.h option.h setter.h text.h when.h
-expr.o: expr.c expr.h
-option.o: option.c option.h action.h
-setter.o: setter.c setter.h expr.h
-when.o: when.c when.h action.h expr.h option.h
-slow_posix.o: slow_posix.c slow.h
-strtable.o: strtable.c strtable.h
-symtable.o: symtable.c symtable.h
-text.o: slow.h strtable.h symtable.h text.h
-utf8nop.o: utf8.h
-lex_yy.c: y_tab.h strtable.h symtable.h utf8.h
-y_tab.c: when.h symtable.h
+#If you are using a GNU compiler, the compiler can assemble a list of dependencies for you. Makefile fragment:
+depend: .depend
+
+.depend: $(SOURCES)
+	rm -f "$@"
+	$(CC) $(CFLAGS) -MM $^ > "$@"
+
+include .depend
+

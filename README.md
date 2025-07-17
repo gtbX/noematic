@@ -27,8 +27,7 @@ noematic.exe DLC_Aaru.dlg
 
 Many of the text adventures included in "Road to Gehenna" will operate standalone like this.
 However, most of the game dialogs expect to run as part of the larger game, and won't operate properly.
-In particular, the `include` directive is not (yet) implemented, so cross-linking between .dlg files won't work.
-Also, anything that keys off of events in the 3D game world won't work, for reasons that should be obvious.
+In particular, anything that keys off of events in the 3D game world won't work, for reasons that should be obvious.
 
 ## Porting
 

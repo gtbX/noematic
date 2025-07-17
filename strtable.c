@@ -1,4 +1,5 @@
 #include "strtable.h"
+#include "utf8.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -7,37 +8,49 @@
 
 #define N_STRINGS 512
 
-char* strings[N_STRINGS] = { 0 };
-int id = 0;
+struct strent {
+    FILE* file;
+    int off;
+    int len;
+};
 
-int add_string(const char* string) {
-    if (string[0] == '\0')
+struct strent strings[N_STRINGS] = { 0 };
+int id = 0;
+char *buf = NULL;
+int buflen = 0;
+
+int add_string(FILE* file, int off, int len) {
+    if (len == 0 || file == NULL)
         return -1;
-    strings[id] = strdup(string);
-    if (!strings[id]) {
-        perror("add_string: strdup");
-        exit(errno);
-    }
+    strings[id].file = file;
+    strings[id].off = off;
+    strings[id].len = len;
     return id++;
 }
 
 const char* get_string(int n) {
-    if (n >= 0 && n < id)
-        return strings[n];
+    if (n >= 0 && n < id) {
+        int l = strings[n].len + 1;
+        if (l > buflen) {
+            if (buf != NULL)
+                free(buf);
+            buf = malloc(l);
+            buflen = l;
+            if (buf == NULL) {
+                perror("malloc");
+                exit(1);
+            }
+        }
+        fseek(strings[n].file, strings[n].off, SEEK_SET);
+        fread(buf, 1, strings[n].len, strings[n].file);
+        buf[strings[n].len] = '\0';
+        filter_utf8(buf);
+        return buf;
+    }
     return "";
 }
 
 void clear_strings() {
-    while(id > 0) {
-        free(strings[--id]);
-    }
-}
-
-void dump_strings() {
-    int i;
-    for (i = 0; i < N_STRINGS; i++) {
-        if (!strings[i])
-            break;
-        printf("%d %s\n", i, strings[i]);
-    }
+    if (buf)
+        free(buf);
 }

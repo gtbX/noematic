@@ -78,7 +78,9 @@
 int yylex(void);
 void yyerror(char*);
 
-#line 82 "y_tab.c"
+extern int yylineno, *pos;
+
+#line 84 "y_tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -536,10 +538,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    53,    53,    54,    55,    56,    59,    62,    65,    66,
-      67,    68,    69,    70,    71,    72,    73,    76,    79,    80,
-      83,    84,    85,    86,    87,    88,    89,    92,    93,    96,
-      97,    98,   101,   104,   105,   108
+       0,    55,    55,    56,    57,    58,    61,    64,    67,    68,
+      69,    70,    71,    72,    73,    74,    75,    78,    81,    82,
+      85,    86,    87,    88,    89,    90,    91,    94,    95,    98,
+      99,   100,   103,   106,   107,   110
 };
 #endif
 
@@ -1148,187 +1150,187 @@ yyreduce:
   switch (yyn)
     {
   case 6: /* string: STRING_DEF SYMBOL STRING  */
-#line 59 "dlg.y"
+#line 61 "dlg.y"
                                                         { *get_var((yyvsp[-1].symbol)) = (yyvsp[0].string); }
-#line 1154 "y_tab.c"
+#line 1156 "y_tab.c"
     break;
 
   case 7: /* when: WHEN '(' expression ')' action_block  */
-#line 62 "dlg.y"
+#line 64 "dlg.y"
                                                         { create_when((yyvsp[-2].expression), (yyvsp[0].action)); }
-#line 1160 "y_tab.c"
+#line 1162 "y_tab.c"
     break;
 
   case 8: /* expression: SYMBOL  */
-#line 65 "dlg.y"
+#line 67 "dlg.y"
                                                         { (yyval.expression) = create_sym_expression((yyvsp[0].symbol)); }
-#line 1166 "y_tab.c"
+#line 1168 "y_tab.c"
     break;
 
   case 9: /* expression: VALUE  */
-#line 66 "dlg.y"
+#line 68 "dlg.y"
                                                         { (yyval.expression) = create_val_expression((yyvsp[0].value)); }
-#line 1172 "y_tab.c"
+#line 1174 "y_tab.c"
     break;
 
   case 10: /* expression: NOT expression  */
-#line 67 "dlg.y"
+#line 69 "dlg.y"
                                                         { (yyval.expression) = create_unary_expression(NOT, (yyvsp[0].expression)); }
-#line 1178 "y_tab.c"
+#line 1180 "y_tab.c"
     break;
 
   case 11: /* expression: '(' expression ')'  */
-#line 68 "dlg.y"
+#line 70 "dlg.y"
                                                         { (yyval.expression) = (yyvsp[-1].expression); }
-#line 1184 "y_tab.c"
+#line 1186 "y_tab.c"
     break;
 
   case 12: /* expression: expression AND expression  */
-#line 69 "dlg.y"
+#line 71 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(AND, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1190 "y_tab.c"
+#line 1192 "y_tab.c"
     break;
 
   case 13: /* expression: expression OR expression  */
-#line 70 "dlg.y"
+#line 72 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(OR, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1196 "y_tab.c"
+#line 1198 "y_tab.c"
     break;
 
   case 14: /* expression: expression EQUALS expression  */
-#line 71 "dlg.y"
+#line 73 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression(EQUALS, (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1202 "y_tab.c"
+#line 1204 "y_tab.c"
     break;
 
   case 15: /* expression: expression '>' expression  */
-#line 72 "dlg.y"
+#line 74 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression('>', (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1208 "y_tab.c"
+#line 1210 "y_tab.c"
     break;
 
   case 16: /* expression: expression '<' expression  */
-#line 73 "dlg.y"
+#line 75 "dlg.y"
                                                         { (yyval.expression) = create_binary_expression('<', (yyvsp[-2].expression), (yyvsp[0].expression)); }
-#line 1214 "y_tab.c"
+#line 1216 "y_tab.c"
     break;
 
   case 17: /* action_block: '{' action_list '}'  */
-#line 76 "dlg.y"
+#line 78 "dlg.y"
                                                         { (yyval.action) = (yyvsp[-1].action); }
-#line 1220 "y_tab.c"
+#line 1222 "y_tab.c"
     break;
 
   case 18: /* action_list: action action_list  */
-#line 79 "dlg.y"
+#line 81 "dlg.y"
                                                         { (yyvsp[-1].action)->next = (yyvsp[0].action); (yyval.action) = (yyvsp[-1].action); }
-#line 1226 "y_tab.c"
+#line 1228 "y_tab.c"
     break;
 
   case 19: /* action_list: %empty  */
-#line 80 "dlg.y"
+#line 82 "dlg.y"
                                                         { (yyval.action) = NULL; }
-#line 1232 "y_tab.c"
+#line 1234 "y_tab.c"
     break;
 
   case 20: /* action: EXIT  */
-#line 83 "dlg.y"
+#line 85 "dlg.y"
                                                         { (yyval.action) = create_action(EXIT); }
-#line 1238 "y_tab.c"
+#line 1240 "y_tab.c"
     break;
 
   case 21: /* action: TEXT ':' STRING  */
-#line 84 "dlg.y"
+#line 86 "dlg.y"
                                                         { (yyval.action) = create_action(TEXT); (yyval.action)->arg.text_str = (yyvsp[0].string); }
-#line 1244 "y_tab.c"
+#line 1246 "y_tab.c"
     break;
 
   case 22: /* action: SHORT ':' STRING  */
-#line 85 "dlg.y"
+#line 87 "dlg.y"
                                                         { (yyval.action) = create_action(SHORT); (yyval.action)->arg.short_str = (yyvsp[0].string); }
-#line 1250 "y_tab.c"
+#line 1252 "y_tab.c"
     break;
 
   case 23: /* action: CLEAR ':' SYMBOL  */
-#line 86 "dlg.y"
+#line 88 "dlg.y"
                                                         { (yyval.action) = create_action(SET); (yyval.action)->arg.setter = create_setter(create_val_expression(0), 0); (yyval.action)->arg.setter->sym = (yyvsp[0].symbol); }
-#line 1256 "y_tab.c"
+#line 1258 "y_tab.c"
     break;
 
   case 24: /* action: SET ':' setter  */
-#line 87 "dlg.y"
+#line 89 "dlg.y"
                                                         { (yyval.action) = create_action(SET); (yyval.action)->arg.setter = (yyvsp[0].setter); }
-#line 1262 "y_tab.c"
+#line 1264 "y_tab.c"
     break;
 
   case 25: /* action: GOTO ':' SYMBOL  */
-#line 88 "dlg.y"
+#line 90 "dlg.y"
                                                         { (yyval.action) = create_action(GOTO); (yyval.action)->arg.goto_sym = (yyvsp[0].symbol); }
-#line 1268 "y_tab.c"
+#line 1270 "y_tab.c"
     break;
 
   case 26: /* action: OPTIONS ':' option_block  */
-#line 89 "dlg.y"
+#line 91 "dlg.y"
                                                         { (yyval.action) = create_action(OPTIONS); (yyval.action)->arg.options = (yyvsp[0].option); }
-#line 1274 "y_tab.c"
+#line 1276 "y_tab.c"
     break;
 
   case 27: /* setter: SYMBOL ';' assignment  */
-#line 92 "dlg.y"
+#line 94 "dlg.y"
                                                         { (yyval.setter) = (yyvsp[0].setter); (yyval.setter)->sym = (yyvsp[-2].symbol); }
-#line 1280 "y_tab.c"
+#line 1282 "y_tab.c"
     break;
 
   case 28: /* setter: SYMBOL  */
-#line 93 "dlg.y"
+#line 95 "dlg.y"
                                                         { (yyval.setter) = create_setter(create_val_expression(1), 0); (yyval.setter)->sym = (yyvsp[0].symbol); }
-#line 1286 "y_tab.c"
+#line 1288 "y_tab.c"
     break;
 
   case 29: /* assignment: '=' expression ';'  */
-#line 96 "dlg.y"
+#line 98 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), 0); }
-#line 1292 "y_tab.c"
+#line 1294 "y_tab.c"
     break;
 
   case 30: /* assignment: '+' '=' expression ';'  */
-#line 97 "dlg.y"
+#line 99 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), 1); }
-#line 1298 "y_tab.c"
+#line 1300 "y_tab.c"
     break;
 
   case 31: /* assignment: '-' '=' expression ';'  */
-#line 98 "dlg.y"
+#line 100 "dlg.y"
                                                         { (yyval.setter) = create_setter((yyvsp[-1].expression), -1); }
-#line 1304 "y_tab.c"
+#line 1306 "y_tab.c"
     break;
 
   case 32: /* option_block: '{' option_list '}'  */
-#line 101 "dlg.y"
+#line 103 "dlg.y"
                                                         { (yyval.option) = (yyvsp[-1].option); }
-#line 1310 "y_tab.c"
+#line 1312 "y_tab.c"
     break;
 
   case 33: /* option_list: option option_list  */
-#line 104 "dlg.y"
+#line 106 "dlg.y"
                                                         { (yyvsp[-1].option)->next = (yyvsp[0].option); (yyval.option) = (yyvsp[-1].option); }
-#line 1316 "y_tab.c"
+#line 1318 "y_tab.c"
     break;
 
   case 34: /* option_list: %empty  */
-#line 105 "dlg.y"
+#line 107 "dlg.y"
                                                         { (yyval.option) = NULL; }
-#line 1322 "y_tab.c"
+#line 1324 "y_tab.c"
     break;
 
   case 35: /* option: STRING action_list  */
-#line 108 "dlg.y"
+#line 110 "dlg.y"
                                                         { (yyval.option) = create_option((yyvsp[-1].string), (yyvsp[0].action)); }
-#line 1328 "y_tab.c"
+#line 1330 "y_tab.c"
     break;
 
 
-#line 1332 "y_tab.c"
+#line 1334 "y_tab.c"
 
       default: break;
     }
@@ -1521,9 +1523,9 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 110 "dlg.y"
+#line 112 "dlg.y"
 
 
 void yyerror(char *s) {
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "%s at %d:%d\n", s, yylineno, *pos);
 }

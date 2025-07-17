@@ -7,6 +7,8 @@
 #include "symtable.h"
 int yylex(void);
 void yyerror(char*);
+
+extern int yylineno, *pos;
 %}
 
 %union {
@@ -110,5 +112,5 @@ option          : STRING action_list                    { $$ = create_option($1,
 %%
 
 void yyerror(char *s) {
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "%s at %d:%d\n", s, yylineno, *pos);
 }
