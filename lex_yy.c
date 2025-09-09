@@ -16,6 +16,7 @@
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
 /* begin standard C headers. */
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -32,8 +33,8 @@
 
 #if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 
-/* C99 says to define __STDC_LIMIT_MACROS before including stdint.h,
- * if you want the limit (max/min) macros for int types. 
+/* C++ systems might need __STDC_LIMIT_MACROS defined before including
+ * <stdint.h>, if you want the limit (max/min) macros for int types.
  */
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS 1
@@ -555,6 +556,7 @@ char *yytext;
 #include "action.h"
 #include "cp.h"
 #include "expr.h"
+#include "file.h"
 #include "option.h"
 #include "setter.h"
 #include "strtable.h"
@@ -570,8 +572,6 @@ int pos_stack[STACK_SIZE] = { 0 }, *pos = pos_stack;
 void advance(int len);
 
 int extract_string(const char* str, int off, int len);
-
-const char* get_filename(const char* path);
 #line 575 "<stdout>"
 
 #line 577 "<stdout>"
@@ -796,7 +796,7 @@ YY_DECL
 		}
 
 	{
-#line 34 "dlg.l"
+#line 33 "dlg.l"
 
 
 #line 802 "<stdout>"
@@ -871,7 +871,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "dlg.l"
+#line 35 "dlg.l"
 advance(yyleng); /* skip BOM */
 	YY_BREAK
 case 2:
@@ -879,102 +879,102 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 37 "dlg.l"
+#line 36 "dlg.l"
 advance(yyleng); /* skip comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 39 "dlg.l"
+#line 38 "dlg.l"
 advance(yyleng); return *yytext;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 41 "dlg.l"
+#line 40 "dlg.l"
 advance(yyleng); return EXIT;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 42 "dlg.l"
+#line 41 "dlg.l"
 advance(yyleng); return TERMINAL;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "dlg.l"
+#line 42 "dlg.l"
 advance(yyleng); return PLAYER;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 44 "dlg.l"
+#line 43 "dlg.l"
 advance(yyleng); return WHEN;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 45 "dlg.l"
+#line 44 "dlg.l"
 advance(yyleng); return STRING_DEF;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 46 "dlg.l"
+#line 45 "dlg.l"
 advance(yyleng); return TEXT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 47 "dlg.l"
+#line 46 "dlg.l"
 advance(yyleng); return TEXT;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 48 "dlg.l"
+#line 47 "dlg.l"
 advance(yyleng); return SHORT;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 49 "dlg.l"
+#line 48 "dlg.l"
 advance(yyleng); return CLEAR;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 50 "dlg.l"
+#line 49 "dlg.l"
 advance(yyleng); return SET;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 51 "dlg.l"
+#line 50 "dlg.l"
 advance(yyleng); return GOTO;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 52 "dlg.l"
+#line 51 "dlg.l"
 advance(yyleng); return OPTIONS;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 53 "dlg.l"
+#line 52 "dlg.l"
 advance(yyleng); /* nothing */
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 55 "dlg.l"
+#line 54 "dlg.l"
 advance(yyleng); return AND;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 56 "dlg.l"
+#line 55 "dlg.l"
 advance(yyleng); return OR;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 57 "dlg.l"
+#line 56 "dlg.l"
 advance(yyleng); return NOT;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 58 "dlg.l"
+#line 57 "dlg.l"
 advance(yyleng); return EQUALS;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 60 "dlg.l"
+#line 59 "dlg.l"
 {
                         yylval.symbol = get_sym(yytext);
                         advance(yyleng);
@@ -983,7 +983,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 65 "dlg.l"
+#line 64 "dlg.l"
 {
                         yylval.value = atoi(yytext);
                         advance(yyleng);
@@ -993,7 +993,7 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 71 "dlg.l"
+#line 70 "dlg.l"
 {
                         yytext[yyleng - 1] = '\0';
                         yylval.string = extract_string(yytext + 1, *pos + 1, yyleng - 2);
@@ -1003,12 +1003,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 78 "dlg.l"
+#line 77 "dlg.l"
 { BEGIN STRING_MODE; yymore(); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 79 "dlg.l"
+#line 78 "dlg.l"
 {
                         BEGIN INITIAL;
                         yytext[yyleng - 2] = '\0';
@@ -1020,25 +1020,25 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 86 "dlg.l"
+#line 85 "dlg.l"
 yymore();
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 88 "dlg.l"
+#line 87 "dlg.l"
 advance(yyleng); BEGIN INCLUDE_MODE;
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 89 "dlg.l"
+#line 88 "dlg.l"
 advance(yyleng); {
                         if (++pos >= pos_stack + STACK_SIZE) {
                             fprintf(stderr, "Include depth limit reached!\n");
                             exit(1);
                         }
                         *pos = 0;
-                        yyin = fopen(yytext, "rb");
+                        yyin = fopen(get_filename(yytext), "rb");
                         if (!yyin) {
                             perror(yytext);
                             exit(1);
@@ -1049,19 +1049,19 @@ advance(yyleng); {
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 103 "dlg.l"
+#line 102 "dlg.l"
 advance(yyleng); BEGIN INITIAL;
 	YY_BREAK
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 105 "dlg.l"
+#line 104 "dlg.l"
 advance(yyleng); /* skip whitespace */
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_MODE):
 case YY_STATE_EOF(INCLUDE_MODE):
-#line 107 "dlg.l"
+#line 106 "dlg.l"
 {
                         yypop_buffer_state();
                         if (!YY_CURRENT_BUFFER)
@@ -1071,7 +1071,7 @@ case YY_STATE_EOF(INCLUDE_MODE):
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 114 "dlg.l"
+#line 113 "dlg.l"
 ECHO;
 	YY_BREAK
 #line 1077 "<stdout>"
@@ -2092,7 +2092,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 114 "dlg.l"
+#line 113 "dlg.l"
 
 
 int yywrap(void) {

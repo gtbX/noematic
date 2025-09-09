@@ -6,6 +6,7 @@
 #include "action.h"
 #include "cp.h"
 #include "expr.h"
+#include "file.h"
 #include "option.h"
 #include "setter.h"
 #include "strtable.h"
@@ -21,8 +22,6 @@ int pos_stack[STACK_SIZE] = { 0 }, *pos = pos_stack;
 void advance(int len);
 
 int extract_string(const char* str, int off, int len);
-
-const char* get_filename(const char* path);
 %}
 
 %option never-interactive
@@ -92,7 +91,7 @@ include[ \t]*\"     advance(yyleng); BEGIN INCLUDE_MODE;
                             exit(1);
                         }
                         *pos = 0;
-                        yyin = fopen(yytext, "rb");
+                        yyin = fopen(get_filename(yytext), "rb");
                         if (!yyin) {
                             perror(yytext);
                             exit(1);

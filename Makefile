@@ -2,6 +2,7 @@
 SOURCES := main.c
 SOURCES += action.c
 SOURCES += expr.c
+SOURCES += filenop.c
 SOURCES += option.c
 SOURCES += setter.c
 SOURCES += when.c

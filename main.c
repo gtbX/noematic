@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	yyin = fopen(argv[1], "rb");
+	yyin = fopen(get_filename(argv[1]), "rb");
 	if (!yyin) {
 		perror("Game file");
 		return errno;
