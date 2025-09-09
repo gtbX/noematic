@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
+#include "file.h"
 #include "when.h"
 #include "option.h"
 #include "setter.h"
