@@ -2,6 +2,9 @@
 
 /What is old is new again./
 
+[![Watch the video](https://img.youtube.com/vi/LKO_VAcn9c4/hqdefault.jpg)](https://www.youtube.com/embed/LKO_VAcn9c4)
+
+
 Noematic is an interpreter for dialog files used by [The Talos Principle](http://croteam.com/talosprinciple/), targetting retro computers such as the IBM PC (other platforms pending).
 It was designed specifically to run the text adventure mini-games released with the "Road to Gehenna" expansion, but can simulate some portions of the main game dialog as well.
 
